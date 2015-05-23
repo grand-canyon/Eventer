@@ -8,7 +8,9 @@
     public class GenericRepository<T> : IRepository<T> where T : class
     {
         protected IEventerDbContext Context { get; set; }
+
         protected IDbSet<T> DbSet { get; set; }
+
         public GenericRepository(IEventerDbContext context)
         {
             this.Context = context;

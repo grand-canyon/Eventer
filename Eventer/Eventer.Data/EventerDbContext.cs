@@ -1,19 +1,32 @@
 ﻿namespace Eventer.Data
 {
     using System.Data.Entity;
-    class EventerDbContext : DbContext, IEventerDbContext
+
+    using Eventer.Models;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    public class EventerDbContext : IdentityDbContext<User>, IEventerDbContext
     {
+        public const string SqlConnectionString = "Server=.;Database=Twitter;Integrated Security=True;";
+
+        public EventerDbContext(string connectionString = SqlConnectionString)
+            : base(connectionString)
+        {
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventerDbContext, Configuration>());
+        }
+
         public EventerDbContext()
-            : base("Eventer")
+            : base("DefaultConnection")
         {
         }
 
-        public IDbSet<T> Set<T>() where T : class
+        public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
         }
 
-        public int SaveChanges()
+        public new int SaveChanges()
         {
             return base.SaveChanges();
         }
