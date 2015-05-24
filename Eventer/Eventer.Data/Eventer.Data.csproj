@@ -31,11 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
@@ -56,17 +56,19 @@
   <ItemGroup>
     <Compile Include="EventerData.cs" />
     <Compile Include="EventerDbContext.cs" />
-    <Compile Include="IEventerData.cs" />
-    <Compile Include="IEventerDbContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Eventer.Contracts\Eventer.Contracts.csproj">
+      <Project>{343200b3-469d-4f91-af90-89913c565a8e}</Project>
+      <Name>Eventer.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eventer.Models\Eventer.Models.csproj">
       <Project>{c5b361ab-5fe0-4375-8bdf-0b93f6856fa6}</Project>
       <Name>Eventer.Models</Name>

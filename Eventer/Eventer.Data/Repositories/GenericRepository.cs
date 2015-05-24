@@ -5,6 +5,8 @@
     using System.Linq.Expressions;
     using System.Data.Entity;
 
+    using Eventer.Contracts;
+
     public class GenericRepository<T> : IRepository<T> where T : class
     {
         protected IEventerDbContext Context { get; set; }

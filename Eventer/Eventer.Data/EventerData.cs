@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using Eventer.Contracts;
     using Eventer.Data.Repositories;
     using Eventer.Models;
 
@@ -23,7 +24,17 @@
 
         public IRepository<User> Users
         {
-            get { return GetRepository<User>(); }
+            get { return this.GetRepository<User>(); }
+        }
+
+        public IRepository<Event> Events
+        {
+            get { return this.GetRepository<Event>(); }
+        }
+
+        public IRepository<Category> Categories
+        {
+            get { return this.GetRepository<Category>(); }
         }
 
         public int SaveChanges()

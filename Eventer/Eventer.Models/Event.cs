@@ -16,30 +16,33 @@
         [Key]
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-
-        public User User { get; set; }
-
         [Required]
         [StringLength(50, MinimumLength = 3)]
         public string Title { get; set; }
 
         [Required]
-        public DateTime EventDate { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
-        public DateTime ExpireDate { get; set; }
-
-        [Required]
-        public string EventLocation { get; set; }
+        public string Location { get; set; }
 
         [Required]
         public string Description { get; set; }
 
         [Range(1, double.MaxValue)]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         public bool IsActive { get; set; }
+
+        public byte[] Image { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual EventStatus Status { get; set; }
+
 
         public ICollection<User> Participants
         {

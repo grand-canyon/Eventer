@@ -1,10 +1,10 @@
-﻿namespace Eventer.Data.Repositories
+﻿namespace Eventer.Contracts
 {
     using System;
     using System.Linq;
     using System.Linq.Expressions;
 
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class 
     {
         IQueryable<T> All();
 
