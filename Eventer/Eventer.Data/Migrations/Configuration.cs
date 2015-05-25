@@ -79,9 +79,10 @@ namespace Eventer.Data.Migrations
             context.Users.AddOrUpdate(x => x.Email,
                 new User
                 {
-                    Email = "klaxon@abv.bg",
-                    UserName = "Karim",
+                    Email = "admin@eventer.com",
+                    UserName = "admin",
                     PasswordHash = password,
+                    SecurityStamp = Guid.NewGuid().ToString(),
                     Events = new List<Event>
                     {
                         context.Events.FirstOrDefault(e => e.Title == "Tribe Ibiza")

@@ -51,9 +51,8 @@
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Password")]
@@ -65,6 +64,11 @@
 
     public class RegisterViewModel
     {
+        [Required]
+        [StringLength(20, MinimumLength = 3)]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
