@@ -10,7 +10,7 @@
 
     public class EventerDbContext : IdentityDbContext<User>, IEventerDbContext
     {
-        public const string SqlConnectionString = "Server=.;Database=Twitter;Integrated Security=True;";
+        public const string SqlConnectionString = "Server=.;Database=Eventer;Integrated Security=True;";
 
         public EventerDbContext()
             : base("DefaultConnection")

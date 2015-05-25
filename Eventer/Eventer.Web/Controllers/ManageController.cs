@@ -5,14 +5,14 @@
     using System.Web;
     using System.Web.Mvc;
 
-    using Eventer.Web.Models;
+    using Eventer.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
     [Authorize]
-    public class ManageController : BaseController
+    public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

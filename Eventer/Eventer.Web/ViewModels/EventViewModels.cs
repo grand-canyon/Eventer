@@ -1,20 +1,14 @@
-﻿namespace Eventer.Models
+﻿namespace Eventer.Web.ViewModels
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
-    public class Event
+    using Eventer.Models;
+
+    public class EventViewModels
     {
         private ICollection<User> participants;
-
-        public Event()
-        {
-            this.participants = new HashSet<User>();
-        }
-
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
@@ -36,14 +30,14 @@
 
         public byte[] Image { get; set; }
 
-        public EventStatus Status { get; set; }
-
         [Required]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<User> Participants
+        public virtual EventStatus Status { get; set; }
+
+        public ICollection<User> Participants
         {
             get { return this.participants; }
             set { this.participants = value; }

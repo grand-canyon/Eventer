@@ -2,8 +2,15 @@
 {
     using System.Web.Mvc;
 
+    using Eventer.Contracts;
+
     public class HomeController : BaseController
     {
+        public HomeController(IEventerData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
             return View();

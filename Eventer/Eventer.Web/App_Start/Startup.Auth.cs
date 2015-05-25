@@ -2,7 +2,7 @@
 {
     using System;
 
-    using Eventer.Web.Models;
+    using Eventer.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;

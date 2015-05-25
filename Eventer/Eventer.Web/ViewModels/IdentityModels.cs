@@ -1,4 +1,4 @@
-﻿namespace Eventer.Web.Models
+﻿namespace Eventer.Web.ViewModels
 {
     using System.Security.Claims;
     using System.Threading.Tasks;

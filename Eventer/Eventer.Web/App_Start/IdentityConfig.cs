@@ -4,7 +4,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using Eventer.Web.Models;
+    using Eventer.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
