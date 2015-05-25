@@ -9,6 +9,7 @@ namespace Eventer.Data.Migrations
     using Eventer.Models;
 
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public sealed class Configuration : DbMigrationsConfiguration<EventerDbContext>
     {
@@ -23,6 +24,7 @@ namespace Eventer.Data.Migrations
             SeedCategories(context);
             SeedTags(context);
             SeedEvents(context);
+            SeedRoles(context);
             SeedUsers(context);
         }
 
@@ -72,23 +74,62 @@ namespace Eventer.Data.Migrations
             }
         }
 
+        private static void SeedRoles(EventerDbContext context)
+        {
+            var roleStore = new RoleStore<IdentityRole>(context);
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+            var roles = new List<IdentityRole>
+            {
+                new IdentityRole("Admin"),
+                new IdentityRole("User"),
+                new IdentityRole("Guest")
+            };
+
+            foreach (var role in roles)
+            {
+                if (roleManager.FindByName(role.Name) == null)
+                {
+                    roleManager.Create(role);
+                }
+            }
+
+            roleStore.Context.SaveChanges();
+        }
+
         private static void SeedUsers(EventerDbContext context)
         {
-            var password = new PasswordHasher().HashPassword("Pass123!");
+            var userStore = new UserStore<User>(context);
+            var userManager = new UserManager<User>(userStore);
 
-            context.Users.AddOrUpdate(x => x.Email,
+            var users = new List<User>
+            {
                 new User
                 {
                     Email = "admin@eventer.com",
                     UserName = "admin",
-                    PasswordHash = password,
-                    SecurityStamp = Guid.NewGuid().ToString(),
+                    LockoutEnabled = true,
                     Events = new List<Event>
                     {
                         context.Events.FirstOrDefault(e => e.Title == "Tribe Ibiza")
                     }
                 }
-            );
+            };
+
+            foreach (var user in users)
+            {
+                if (userManager.FindByName(user.UserName) == null)
+                {
+                    userManager.Create(user, "Pass123!");
+                    userManager.SetLockoutEnabled(user.Id, false);
+                    userManager.AddToRole(user.Id, "User");
+                }
+            
+            }
+
+            userManager.AddToRole(users.FirstOrDefault(x => x.UserName == "admin").Id, "Admin");
+
+            userStore.Context.SaveChanges();
         }
     }
 }
