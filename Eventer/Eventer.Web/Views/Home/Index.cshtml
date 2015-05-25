@@ -1,3 +1,6 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<Eventer.Models.Event>
+
+@foreach (var e in Model)
+{
+    <p>@e.Title</p>
 }

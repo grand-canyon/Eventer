@@ -12,6 +12,8 @@
 
         IRepository<Category> Categories { get; }
 
+        IRepository<Tag> Tags { get; } 
+
         int SaveChanges();
     }
 }

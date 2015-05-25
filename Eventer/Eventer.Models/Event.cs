@@ -6,10 +6,12 @@
 
     public class Event
     {
+        private ICollection<Tag> tags;
         private ICollection<User> participants;
 
         public Event()
         {
+            this.tags = new HashSet<Tag>();
             this.participants = new HashSet<User>();
         }
 
@@ -22,6 +24,10 @@
 
         [Required]
         public DateTime Date { get; set; }
+
+        public TimeSpan Duration { get; set; }
+
+        public decimal? Cost { get; set; }
 
         [Required]
         public string Location { get; set; }
@@ -42,6 +48,12 @@
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public virtual ICollection<Tag> Tags
+        {
+            get { return this.tags; }
+            set { this.tags = value; }
+        }
 
         public virtual ICollection<User> Participants
         {

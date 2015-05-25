@@ -1,5 +1,6 @@
 ﻿namespace Eventer.Web.Controllers
 {
+    using System.Linq;
     using System.Web.Mvc;
 
     using Eventer.Contracts;
@@ -13,7 +14,9 @@
 
         public ActionResult Index()
         {
-            return View();
+            var events = this.Data.Events.All().ToList();
+
+            return View(events);
         }
 
         public ActionResult About()

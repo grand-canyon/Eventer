@@ -37,6 +37,11 @@
             get { return this.GetRepository<Category>(); }
         }
 
+        public IRepository<Tag> Tags
+        {
+            get { return this.GetRepository<Tag>(); }
+        }
+
         public int SaveChanges()
         {
             return context.SaveChanges();

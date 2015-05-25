@@ -21,6 +21,7 @@ namespace Eventer.Data.Migrations
         protected override void Seed(EventerDbContext context)
         {
             SeedCategories(context);
+            SeedTags(context);
             SeedEvents(context);
             SeedUsers(context);
         }
@@ -30,9 +31,18 @@ namespace Eventer.Data.Migrations
             context.Categories.AddOrUpdate(x => x.Name,
                 new Category
                 {
-                    Name = "Festival"
+                    Name = "Concerts"
                 }
             );
+        }
+
+        private static void SeedTags(IEventerDbContext context)
+        {
+            context.Tags.AddOrUpdate(x => x.Name,
+                new Tag
+                {
+                    Name = "Event"
+                });
         }
 
         private static void SeedEvents(IEventerDbContext context)
@@ -42,12 +52,17 @@ namespace Eventer.Data.Migrations
                 new Event
                 {
                     Title = "Tribe Ibiza",
-                    Category = context.Categories.FirstOrDefault(c => c.Name == "Festival"),
+                    Category = context.Categories.FirstOrDefault(c => c.Name == "Concerts"),
                     Date = new DateTime(2015, 6, 3),
+                    Duration = new TimeSpan(0, 3, 30, 0),
                     Description = "Tribe Ibiza Launch Competition",
                     IsActive = true,
                     Location = "Ibiza Old Town in Ciudad de Ibiza, Spain",
-                    Status = EventStatus.Open
+                    Status = EventStatus.Open,
+                    Tags = new List<Tag>
+                    {
+                        context.Tags.FirstOrDefault(t => t.Name == "Event")
+                    }
                 }
             };
 

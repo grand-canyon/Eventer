@@ -15,9 +15,7 @@
         // GET: Event
         public ActionResult Index()
         {
-            var events = this.Data.Events.All().ToList();
-
-            return View(events);
+            return View();
         }
     }
 }

@@ -27,7 +27,12 @@
 
         public virtual IDbSet<Category> Categories { get; set; }
 
-        public DbContext DbContext { get { return this; } }
+        public virtual IDbSet<Tag> Tags { get; set; }
+
+        public DbContext DbContext
+        {
+            get { return this; }
+        }
 
         public new IDbSet<T> Set<T>() where T : class
         {

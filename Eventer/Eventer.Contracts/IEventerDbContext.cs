@@ -13,6 +13,8 @@
 
         IDbSet<Category> Categories { get; set; }
 
+        IDbSet<Tag> Tags { get; set; }
+
         IDbSet<T> Set<T>() where T : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
