@@ -123,11 +123,13 @@ namespace Eventer.Data.Migrations
                     userManager.Create(user, "Pass123!");
                     userManager.SetLockoutEnabled(user.Id, false);
                     userManager.AddToRole(user.Id, "User");
-                }
-            
-            }
 
-            userManager.AddToRole(users.FirstOrDefault(x => x.UserName == "admin").Id, "Admin");
+                    if (user.UserName == "admin")
+                    {
+                        userManager.AddToRole(user.Id, "Admin");
+                    }
+                }
+            }
 
             userStore.Context.SaveChanges();
         }
