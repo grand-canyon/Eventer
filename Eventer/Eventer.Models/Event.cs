@@ -1,4 +1,6 @@
-﻿namespace Eventer.Models
+﻿using System.ComponentModel;
+
+namespace Eventer.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -13,29 +15,31 @@
         {
             this.tags = new HashSet<Tag>();
             this.participants = new HashSet<User>();
+            this.IsActive = true;
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(250, MinimumLength = 3, ErrorMessage = "Event title is required!")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Event Start date is required!")]
         public DateTime Date { get; set; }
 
         public TimeSpan Duration { get; set; }
 
         public decimal? Cost { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Event Location is required!")]
         public string Location { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Event description is required!")]
         public string Description { get; set; }
 
-        [Range(1, double.MaxValue)]
+        [Range(1, int.MaxValue)]
+        [DefaultValue(int.MaxValue)]
         public int? Limit { get; set; }
 
         public bool IsActive { get; set; }
@@ -44,7 +48,7 @@
 
         public EventStatus Status { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Event Category is required!")]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

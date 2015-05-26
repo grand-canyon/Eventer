@@ -20,7 +20,7 @@
         public EventerDbContext(string connectionString = SqlConnectionString)
             : base(connectionString)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventerDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventerDbContext, DbMigrationsConfiguration>());
         }
 
         public virtual IDbSet<Event> Events { get; set; }

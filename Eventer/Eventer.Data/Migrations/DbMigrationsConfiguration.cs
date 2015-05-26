@@ -11,9 +11,9 @@ namespace Eventer.Data.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public sealed class Configuration : DbMigrationsConfiguration<EventerDbContext>
+    public sealed class DbMigrationsConfiguration : DbMigrationsConfiguration<EventerDbContext>
     {
-        public Configuration()
+        public DbMigrationsConfiguration()
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true; // TODO: Remove in production
@@ -21,30 +21,69 @@ namespace Eventer.Data.Migrations
 
         protected override void Seed(EventerDbContext context)
         {
-            SeedCategories(context);
-            SeedTags(context);
-            SeedEvents(context);
-            SeedRoles(context);
-            SeedUsers(context);
+            if (!context.Categories.Any())
+            {
+                SeedCategories(context);
+            }
+            if (!context.Tags.Any())
+            {
+                SeedTags(context);
+            }
+            if (!context.Events.Any())
+            {
+                SeedEvents(context);
+            }
+            if (!context.Roles.Any())
+            {
+                SeedRoles(context);
+            }
+            if (!context.Users.Any())
+            {
+                SeedUsers(context);
+            }
         }
 
         private static void SeedCategories(IEventerDbContext context)
         {
-            context.Categories.AddOrUpdate(x => x.Name,
-                new Category
-                {
-                    Name = "Concerts"
-                }
-            );
+            var categories = new List<Category>
+            {
+                new Category {Name = "Concerts & Music"},
+                new Category {Name = "Business & Professional"},
+                new Category {Name = "Science & Technology"},
+                new Category {Name = "Performing & Visual Arts"},
+                new Category {Name = "Travel & Outdoor"},
+                new Category {Name = "Sport & Fitness"},
+                new Category {Name = "Other"},
+            };
+
+            foreach (var category in categories)
+            {
+                context.Categories.Add(category);
+            }
+
+            context.SaveChanges();
         }
 
         private static void SeedTags(IEventerDbContext context)
         {
-            context.Tags.AddOrUpdate(x => x.Name,
-                new Tag
-                {
-                    Name = "Event"
-                });
+            var tags = new List<Tag>
+            {
+                new Tag {Name = "Free"},
+                new Tag {Name = "Experience"},
+                new Tag {Name = "Jobs"},
+                new Tag {Name = "Programming"},
+                new Tag {Name = "Android"},
+                new Tag {Name = "Development"},
+                new Tag {Name = "Software"},
+                new Tag {Name = "Event"}
+            };
+
+            foreach (var tag in tags)
+            {
+                context.Tags.Add(tag);
+            }
+
+            context.SaveChanges();  
         }
 
         private static void SeedEvents(IEventerDbContext context)
@@ -54,7 +93,7 @@ namespace Eventer.Data.Migrations
                 new Event
                 {
                     Title = "Tribe Ibiza",
-                    Category = context.Categories.FirstOrDefault(c => c.Name == "Concerts"),
+                    Category = context.Categories.FirstOrDefault(c => c.Name == "Concerts & Music"),
                     Date = new DateTime(2015, 6, 3),
                     Duration = new TimeSpan(0, 3, 30, 0),
                     Description = "Tribe Ibiza Launch Competition",
@@ -65,13 +104,32 @@ namespace Eventer.Data.Migrations
                     {
                         context.Tags.FirstOrDefault(t => t.Name == "Event")
                     }
+                },
+                new Event
+                {
+                    Title = "Practical course for Android development in SoftUni",
+                    Category = context.Categories.FirstOrDefault(c => c.Name == "Science & Technology"),
+                    Date = new DateTime(2015, 5, 28),
+                    Duration = new TimeSpan(0, 4, 0, 0),
+                    Description = "You are welcome to join us in the free practical course for Android development in Software University",
+                    IsActive = true,
+                    Location = "Sofia, ul. Tintyava 15-17, 2nd floor",
+                    Status = EventStatus.Open,
+                    Tags = new List<Tag>
+                    {
+                        context.Tags.FirstOrDefault(t => t.Name == "Software"),
+                        context.Tags.FirstOrDefault(t => t.Name == "Android"),
+                        context.Tags.FirstOrDefault(t => t.Name == "Free")
+                    }
                 }
             };
 
-            foreach (var e in events.Where(e => !context.Events.Any(x => x.Title == e.Title)))
+            foreach (var e in events)
             {
-                context.Events.AddOrUpdate(e);
+                context.Events.Add(e);
             }
+
+            context.SaveChanges();
         }
 
         private static void SeedRoles(EventerDbContext context)

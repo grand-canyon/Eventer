@@ -11,7 +11,7 @@
         private ICollection<User> participants;
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(250, MinimumLength = 3)]
         public string Title { get; set; }
 
         [Required]
