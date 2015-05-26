@@ -1,11 +1,17 @@
 ﻿namespace Eventer.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
 
-    using Eventer.Models;
     using Eventer.Contracts;
+    using Eventer.Data;
+    using Eventer.Models;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public abstract class BaseController : Controller
     {
@@ -18,6 +24,7 @@
 
         protected User CurrentUser { get; set; }
 
+        [ChildActionOnly]
         protected ActionResult RedirectToAction<TController>(Expression<Action<TController>> action) where TController : Controller
         {
             var actionBody = (MethodCallExpression)action.Body;
@@ -27,6 +34,22 @@
             controllerName = controllerName.Substring(0, controllerName.Length - "Controller".Length);
 
             return RedirectToAction(methodName, controllerName);
+        }
+
+        [ChildActionOnly]
+        protected ICollection<User> GetUsersInRole(string roleName)
+        {
+            var roleStore = new RoleStore<IdentityRole>(EventerDbContext.Create().DbContext);
+
+            var roleManager = new RoleManager<IdentityRole>(roleStore)
+                .FindByName(roleName).Users
+                .Select(x => x.UserId);
+
+            var usersInRole = this.Data.Users.All()
+                .Where(u => roleManager.Contains(u.Id))
+                .ToList();
+
+            return usersInRole;
         }
     }
 }

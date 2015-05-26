@@ -1,5 +1,6 @@
 ﻿namespace Eventer.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -12,10 +13,12 @@
         {
         }
 
-        // GET: Event
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var events = this.Data.Events.All().Where(e => e.Date > DateTime.Now).ToList();
+
+            return View(events);
         }
     }
 }

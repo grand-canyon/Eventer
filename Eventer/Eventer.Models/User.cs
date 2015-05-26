@@ -1,5 +1,6 @@
 ﻿namespace Eventer.Models
 {
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -19,6 +20,17 @@
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", this.FirstName, this.LastName);
+            }
+        }
+
+        public string Avatar { get; set; }
 
         public virtual ICollection<Event> Events
         {
