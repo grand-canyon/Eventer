@@ -4,23 +4,23 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Eventer.Models;
+    using Models;
 
     public class EventViewModels
     {
         private ICollection<User> participants;
 
-        [Required]
+        [Required(ErrorMessage = "Event Title is required!")]
         [StringLength(250, MinimumLength = 3)]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Event Date is required!")]
         public DateTime Date { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The event must have a location!")]
         public string Location { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Event Description is required!")]
         public string Description { get; set; }
 
         [Range(1, double.MaxValue)]
@@ -30,7 +30,7 @@
 
         public byte[] Image { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The event must have a category!")]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

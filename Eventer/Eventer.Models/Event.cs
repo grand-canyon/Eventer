@@ -22,12 +22,13 @@ namespace Eventer.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(250, MinimumLength = 3, ErrorMessage = "Event title is required!")]
+        [StringLength(250, MinimumLength = 5, ErrorMessage = "Event title is required!")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Event Start date is required!")]
         public DateTime Date { get; set; }
 
+        [Required(ErrorMessage = "The event should have duration!")]
         public TimeSpan Duration { get; set; }
 
         public decimal? Cost { get; set; }
@@ -39,7 +40,6 @@ namespace Eventer.Models
         public string Description { get; set; }
 
         [Range(1, int.MaxValue)]
-        [DefaultValue(int.MaxValue)]
         public int? Limit { get; set; }
 
         public bool IsActive { get; set; }

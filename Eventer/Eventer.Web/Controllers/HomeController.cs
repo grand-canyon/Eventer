@@ -1,5 +1,6 @@
 ﻿namespace Eventer.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -14,7 +15,7 @@
 
         public ActionResult Index()
         {
-            var events = this.Data.Events.All().ToList();
+            var events = this.Data.Events.All().Where(e => e.Date > DateTime.Now).ToList();
 
             return View(events);
         }
