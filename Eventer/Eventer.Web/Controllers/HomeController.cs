@@ -2,9 +2,12 @@
 {
     using System;
     using System.Linq;
+    using System.Net;
+    using System.Net.Mail;
     using System.Web.Mvc;
 
     using Eventer.Contracts;
+    using Eventer.Web.ViewModels;
 
     public class HomeController : BaseController
     {
@@ -20,18 +23,48 @@
             return View(events);
         }
 
+        [OutputCache(NoStore = true, Duration = 24 * 60 * 60)]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var team = this.GetUsersInRole("Admin")
+                .Where(x => x.UserName != "admin")
+                .ToList();
 
-            return View();
+            return View(team);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(ContactViewModel contact)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(contact);
+            }
+
+            var mail = new MailMessage
+            {
+                From = new MailAddress(contact.Email),
+                To = { "info@eventer.com" },
+                Subject = contact.Subject,
+                Body = contact.Message
+            };
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.mail.google.com",
+                Port = 465,
+                Credentials = new NetworkCredential("user", "password"),
+                EnableSsl = true
+            };
+
+            smtp.Send(mail);
+
+            return RedirectToAction<HomeController>(x => x.Index());
         }
     }
 }

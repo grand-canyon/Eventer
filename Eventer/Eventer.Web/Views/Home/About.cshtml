@@ -1,5 +1,21 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@model List<Eventer.Models.User>
+
+<h1>Grand Canyon Team</h1>
+<hr />
+<div class="row">
+    @foreach (var user in Model)
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="https://softuni.bg/users/profile/show/@user.UserName">
+                    <img src="@user.Avatar" alt="@user.FullName" class="img-responsive" />
+                </a>
+                <div class="caption text-center">
+                    <h4>@user.FullName</h4>
+                    <p><b>@user.UserName</b></p>
+                    <a href="https://softuni.bg/users/profile/show/@user.UserName" class="btn btn-sm btn-success">Read More</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

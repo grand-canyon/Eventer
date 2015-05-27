@@ -21,26 +21,11 @@ namespace Eventer.Data.Migrations
 
         protected override void Seed(EventerDbContext context)
         {
-            if (!context.Categories.Any())
-            {
-                SeedCategories(context);
-            }
-            if (!context.Tags.Any())
-            {
-                SeedTags(context);
-            }
-            if (!context.Events.Any())
-            {
-                SeedEvents(context);
-            }
-            if (!context.Roles.Any())
-            {
-                SeedRoles(context);
-            }
-            if (!context.Users.Any())
-            {
-                SeedUsers(context);
-            }
+            SeedCategories(context);
+            SeedTags(context);
+            SeedEvents(context);
+            SeedRoles(context);
+            SeedUsers(context);
         }
 
         private static void SeedCategories(IEventerDbContext context)
@@ -58,7 +43,7 @@ namespace Eventer.Data.Migrations
 
             foreach (var category in categories)
             {
-                context.Categories.Add(category);
+                context.Categories.AddOrUpdate(c => c.Name, category);
             }
 
             context.SaveChanges();
@@ -80,10 +65,10 @@ namespace Eventer.Data.Migrations
 
             foreach (var tag in tags)
             {
-                context.Tags.Add(tag);
+                context.Tags.AddOrUpdate(t => t.Name, tag);
             }
 
-            context.SaveChanges();  
+            context.SaveChanges();
         }
 
         private static void SeedEvents(IEventerDbContext context)
@@ -128,7 +113,10 @@ namespace Eventer.Data.Migrations
 
             foreach (var e in events)
             {
-                context.Events.Add(e);
+                if (!context.Events.Any(x => x.Title == e.Title))
+                {
+                    context.Events.AddOrUpdate(x => x.Title, e);
+                }
             }
 
             context.SaveChanges();
@@ -166,13 +154,37 @@ namespace Eventer.Data.Migrations
             {
                 new User
                 {
-                    Email = "admin@eventer.com",
                     UserName = "admin",
-                    LockoutEnabled = true,
+                    Email = "admin@eventer.com",
                     Events = new List<Event>
                     {
-                        context.Events.FirstOrDefault(e => e.Title == "Tribe Ibiza")
+                        context.Events.FirstOrDefault(e => e.Title.Contains("Tribe Ibiza")),
+                        context.Events.FirstOrDefault(e => e.Title.Contains("Practical course for Android"))
                     }
+                },
+                new User
+                {
+                    FirstName = "Nina",
+                    LastName = "Markova",
+                    UserName = "Markova",
+                    Email = "nina.n.markova@gmail.com",
+                    Avatar = "https://softuni.bg/Users/Profile/ShowAvatar/f1b52eba-225e-45dd-b803-30be4f789747"
+                },
+                new User
+                {
+                    FirstName = "Christopher",
+                    LastName = "Savov",
+                    UserName = "f1mp3r",
+                    Email = "craizup@gmail.com",
+                    Avatar = "https://softuni.bg/Users/Profile/ShowAvatar/bb4df91d-ef74-4b34-9a87-bc62dc881e84"
+                },
+                new User
+                {
+                    FirstName = "Karim",
+                    LastName = "Hristov",
+                    UserName = "Flyer",
+                    Email = "unbelt@outlook.com",
+                    Avatar = "https://softuni.bg/Users/Profile/ShowAvatar/b7b69109-2893-4d88-9d53-39feb38bb8b5"
                 }
             };
 
@@ -180,11 +192,11 @@ namespace Eventer.Data.Migrations
             {
                 if (userManager.FindByName(user.UserName) == null)
                 {
-                    userManager.Create(user, "Pass123!");
+                    userManager.Create(user, "pass123");
                     userManager.SetLockoutEnabled(user.Id, false);
                     userManager.AddToRole(user.Id, "User");
 
-                    if (user.UserName == "admin")
+                    if (user.UserName == "admin" || user.UserName == "Flyer" || user.UserName == "Markova" || user.UserName == "f1mp3r")
                     {
                         userManager.AddToRole(user.Id, "Admin");
                     }
