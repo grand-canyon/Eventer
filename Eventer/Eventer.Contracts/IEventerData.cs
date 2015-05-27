@@ -12,7 +12,9 @@
 
         IRepository<Category> Categories { get; }
 
-        IRepository<Tag> Tags { get; } 
+        IRepository<Tag> Tags { get; }
+
+        IRepository<Comment> Comments { get; } 
 
         int SaveChanges();
     }

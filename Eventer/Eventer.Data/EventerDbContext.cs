@@ -29,6 +29,8 @@
 
         public virtual IDbSet<Tag> Tags { get; set; }
 
+        public virtual IDbSet<Comment> Comments { get; set; }
+
         public DbContext DbContext
         {
             get { return this; }

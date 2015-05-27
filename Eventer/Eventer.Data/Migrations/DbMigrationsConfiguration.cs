@@ -5,8 +5,8 @@ namespace Eventer.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    using Eventer.Contracts;
-    using Eventer.Models;
+    using Contracts;
+    using Models;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -47,13 +47,13 @@ namespace Eventer.Data.Migrations
         {
             var categories = new List<Category>
             {
-                new Category {Name = "Concerts & Music"},
-                new Category {Name = "Business & Professional"},
-                new Category {Name = "Science & Technology"},
-                new Category {Name = "Performing & Visual Arts"},
-                new Category {Name = "Travel & Outdoor"},
-                new Category {Name = "Sport & Fitness"},
-                new Category {Name = "Other"},
+                new Category {Name = "Concerts & Music", UrlSlug = "concerts-music"},
+                new Category {Name = "Business & Professional", UrlSlug = "business-professional"},
+                new Category {Name = "Science & Technology", UrlSlug = "science-technology"},
+                new Category {Name = "Performing & Visual Arts", UrlSlug = "performing-visual-arts"},
+                new Category {Name = "Travel & Outdoor", UrlSlug = "travel-outdoor"},
+                new Category {Name = "Sport & Fitness", UrlSlug = "sport-fitness"},
+                new Category {Name = "Other", UrlSlug = "other"},
             };
 
             foreach (var category in categories)
@@ -68,14 +68,14 @@ namespace Eventer.Data.Migrations
         {
             var tags = new List<Tag>
             {
-                new Tag {Name = "Free"},
-                new Tag {Name = "Experience"},
-                new Tag {Name = "Jobs"},
-                new Tag {Name = "Programming"},
-                new Tag {Name = "Android"},
-                new Tag {Name = "Development"},
-                new Tag {Name = "Software"},
-                new Tag {Name = "Event"}
+                new Tag {Name = "Free", UrlSlug = "free"},
+                new Tag {Name = "Experience", UrlSlug = "experience"},
+                new Tag {Name = "Jobs", UrlSlug = "jobs"},
+                new Tag {Name = "Programming", UrlSlug = "programming"},
+                new Tag {Name = "Android", UrlSlug = "android"},
+                new Tag {Name = "Development", UrlSlug = "development"},
+                new Tag {Name = "Software", UrlSlug = "software"},
+                new Tag {Name = "Event", UrlSlug = "event"}
             };
 
             foreach (var tag in tags)
@@ -100,6 +100,7 @@ namespace Eventer.Data.Migrations
                     IsActive = true,
                     Location = "Ibiza Old Town in Ciudad de Ibiza, Spain",
                     Status = EventStatus.Open,
+                    UrlSlug = "tribe-ibiza",
                     Tags = new List<Tag>
                     {
                         context.Tags.FirstOrDefault(t => t.Name == "Event")
@@ -115,6 +116,7 @@ namespace Eventer.Data.Migrations
                     IsActive = true,
                     Location = "Sofia, ul. Tintyava 15-17, 2nd floor",
                     Status = EventStatus.Open,
+                    UrlSlug = "practical-course-for-android-development-in-softuni",
                     Tags = new List<Tag>
                     {
                         context.Tags.FirstOrDefault(t => t.Name == "Software"),
