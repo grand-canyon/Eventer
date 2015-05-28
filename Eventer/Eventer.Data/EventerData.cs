@@ -42,6 +42,11 @@
             get { return this.GetRepository<Tag>(); }
         }
 
+        public IRepository<Comment> Comments
+        {
+            get { return this.GetRepository<Comment>(); }
+        }
+
         public int SaveChanges()
         {
             return context.SaveChanges();

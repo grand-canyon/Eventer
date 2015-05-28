@@ -19,6 +19,9 @@
         [StringLength(20, MinimumLength = 2)]
         public string Name { get; set; }
 
+        [Required]
+        public string UrlSlug { get; set; }
+
         public virtual ICollection<Event> Events
         {
             get { return this.events; }

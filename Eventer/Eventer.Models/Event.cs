@@ -1,20 +1,21 @@
-﻿using System.ComponentModel;
-
-namespace Eventer.Models
+﻿namespace Eventer.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Event
     {
         private ICollection<Tag> tags;
         private ICollection<User> participants;
+        private ICollection<Comment> comments;
 
         public Event()
         {
             this.tags = new HashSet<Tag>();
             this.participants = new HashSet<User>();
+            this.comments = new HashSet<Comment>();
             this.IsActive = true;
         }
 
@@ -44,9 +45,13 @@ namespace Eventer.Models
 
         public bool IsActive { get; set; }
 
-        public byte[] Image { get; set; }
+        [Column(TypeName = "ntext")]
+        public string Image { get; set; }
 
         public EventStatus Status { get; set; }
+
+        [Required]
+        public string UrlSlug { get; set; }
 
         [Required(ErrorMessage = "Event Category is required!")]
         public int CategoryId { get; set; }
@@ -63,6 +68,12 @@ namespace Eventer.Models
         {
             get { return this.participants; }
             set { this.participants = value; }
+        }
+
+        public virtual ICollection<Comment> Comments
+        {
+            get { return this.comments; }
+            set { this.comments = value; }
         }
     }
 }

@@ -1,1 +1,25 @@
-﻿<h1>Events Calendar</h1>
+﻿@model List<Eventer.Models.Event>
+<h1>Upcoming Events</h1>
+@foreach (var e in Model)
+{
+    <div class="event-box">
+        <div class="media">
+            @*<div class="media-left">
+                    <a href="Event/@e.Id">
+                        <img class="media-object" src="@if (e.Image.Length > 0) {@e.im} alt="@e.Title"/>
+                    </a>
+                </div>*@
+            <div class="media-body">
+                <h3 class="media-heading"><a href="/Event/@e.Id/@e.UrlSlug">@e.Title</a></h3>
+                @e.Description
+                <hr />
+                <span class="text-muted">
+                    Date: @e.Date |
+                    Duration: @e.Duration |
+                    @e.Category.Name |
+                    @e.Participants.Count people are going (@Html.ActionLink("Join them", "Join", "Events"))
+                </span>
+            </div>
+        </div>
+    </div>
+}
