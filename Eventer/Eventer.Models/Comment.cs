@@ -1,5 +1,4 @@
-﻿
-namespace Eventer.Models
+﻿namespace Eventer.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;

@@ -1,1 +1,42 @@
-﻿
+﻿@model List<Eventer.Models.Event>
+
+<h1>Upcoming Events</h1>
+
+@foreach (var e in Model)
+{
+    <div class="post">
+        <a class="thumbLink" href="#" title="@e.Title">
+            <img width="600" height="350" src="@e.Image" alt="@e.Title" />
+        </a>
+        <a class="dateInfo" href="#">
+            <div class="dayInfo">@e.Date.Day</div>
+            <div class="timeInfo">@e.Date.DayOfWeek @e.Date.Hour</div>
+            <div class="monthInfo">@e.Date.Month</div>
+        </a>
+
+        <div class="listContent">
+            <h2 class="posttitle"><a href="#" rel="bookmark" title="@e.Title">@e.Title</a></h2>
+
+            <div class="smallMeta">
+                <i class="fa fa-tag">
+                    @foreach (var tag in e.Tags)
+                    {
+                        @tag.Name // TODO
+                    }
+                </i>
+                <i class="fa fa-folder"> @e.Category.Name</i>
+                <i class="fa fa-comment"> @e.Comments.Count</i>
+                @if (e.IsActive)
+                {
+                    <i class="fa fa-bolt"> Active</i>
+                }
+                else
+                {
+                    <i class="fa fa-exclamation-circle"> Expired</i>
+                }
+            </div>
+
+            <p>@e.Description &#8230; <a href="#"> Continue &rarr;</a></p>
+        </div>
+    </div>
+}

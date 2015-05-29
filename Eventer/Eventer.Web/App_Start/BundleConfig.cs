@@ -24,6 +24,7 @@
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
+                "~/Content/css/font-awesome.css",
                 "~/Content/site.css"));
         }
     }

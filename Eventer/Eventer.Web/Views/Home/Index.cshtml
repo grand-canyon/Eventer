@@ -1,25 +1,45 @@
-﻿@model List<Eventer.Models.Event>
-<h1>Upcoming Events</h1>
-@foreach (var e in Model)
-{
-    <div class="event-box">
-        <div class="media">
-            @*<div class="media-left">
-                    <a href="Event/@e.Id">
-                        <img class="media-object" src="@if (e.Image.Length > 0) {@e.im} alt="@e.Title"/>
-                    </a>
-                </div>*@
-            <div class="media-body">
-                <h3 class="media-heading"><a href="/Event/@e.Id/@e.UrlSlug">@e.Title</a></h3>
-                @e.Description
-                <hr />
-                <span class="text-muted">
-                    Date: @e.Date |
-                    Duration: @e.Duration |
-                    @e.Category.Name |
-                    @e.Participants.Count people are going (@Html.ActionLink("Join them", "Join", "Events"))
-                </span>
+﻿<!--SLIDER-->
+<div id="slider">
+    <ul class="slides">
+        <li>
+            <div class="sliderInfo">
+                <a class="sliderTitle" href="#">Party Like It&#8217;s 2017</a><br />
+                <div class="sliderDate">12.25.2017</div>
             </div>
-        </div>
-    </div>
-}
+            <img width="900" height="350" src="http://lorempixel.com/900/350" alt="slide-1" />
+        </li>
+    </ul>
+</div><!--end slider-->
+
+<!--TAGLINE-->
+<div id="tagLine">Welcome to the party. @Html.ActionLink("eventer", "Index", "Home") is the way to find your place!</div>
+
+<!--FILTER-->
+<div id="filter" class="blackBar">
+    <ul>
+        <li><a class="active" href="#">Events</a></li>
+        <li>
+            <a href="#">Concerts</a>
+        </li>
+    </ul>
+</div><!--end filter-->
+
+<!--DATE LIST-->
+<ul id="dateList">
+    <li class="box monthYear">
+        <a class="dateLink" href="#">
+            <span>Jun</span><br />
+            2015
+        </a>
+    </li>
+    <li class="box">
+        <a href="#">
+            <span class="theDay">02</span><br />
+            <p class="theTitle">
+                <span>Tue @@ 4:42 am</span><br />
+                How To Be Better Than You
+            </p>
+        </a>
+    </li>
+    <li class="box" id="theEnd">The End.</li>
+</ul><!--end date list-->

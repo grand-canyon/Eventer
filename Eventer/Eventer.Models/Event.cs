@@ -8,14 +8,14 @@
     public class Event
     {
         private ICollection<Tag> tags;
-        private ICollection<User> participants;
         private ICollection<Comment> comments;
+        private ICollection<User> participants;
 
         public Event()
         {
             this.tags = new HashSet<Tag>();
-            this.participants = new HashSet<User>();
             this.comments = new HashSet<Comment>();
+            this.participants = new HashSet<User>();
             this.IsActive = true;
         }
 
@@ -43,10 +43,10 @@
         [Range(1, int.MaxValue)]
         public int? Limit { get; set; }
 
-        public bool IsActive { get; set; }
-
         [Column(TypeName = "ntext")]
         public string Image { get; set; }
+
+        public bool IsActive { get; set; }
 
         public EventStatus Status { get; set; }
 
@@ -64,16 +64,16 @@
             set { this.tags = value; }
         }
 
-        public virtual ICollection<User> Participants
-        {
-            get { return this.participants; }
-            set { this.participants = value; }
-        }
-
         public virtual ICollection<Comment> Comments
         {
             get { return this.comments; }
             set { this.comments = value; }
+        }
+
+        public virtual ICollection<User> Participants
+        {
+            get { return this.participants; }
+            set { this.participants = value; }
         }
     }
 }

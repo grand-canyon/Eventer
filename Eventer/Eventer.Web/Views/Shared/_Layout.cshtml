@@ -3,40 +3,60 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Eventer</title>
-    <meta name="description" content="Simple Event System" />
+    <title>@ViewBag.Title - eventer</title>
+    <meta name="description" content="Simple Event System"/>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Eventer", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Events", "Index", "Event")</li>
+    <div id="wrapper" class="container body-content">
+        <!--HEADER-->
+        <div id="header">
+            <a id="logo" href="/"><img src="~/Content/Images/logo.png" alt="eventer" /></a>
+
+            <!--MENU-->
+            <nav id="navigation">
+                <ul id="dropmenu">
+                    <li class="current-menu-item">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>
+                        @Html.ActionLink("Events", "Index", "Events")
+                        <ul>
+                            <li><a href="#">Categories</a></li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Submit", "Submit", "Events")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+            </nav>
+
+            <select id="selectMenu">
+                <option value="" selected="selected">Menu</option>
+                <option value="#">Home</option>
+                <option value="#">About</option>
+                <option value="#">Contacts</option>
+                <option value="#">Submit Event</option>
+            </select><!--end menu-->
+
+        </div><!--end header-->
+
+        <div id="content">
+            @RenderBody()
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - Eventer</p>
+            <!--SOCIAL ICONS-->
+            <div id="socialIcons">
+                <!--TODO: Social Icons-->
+            </div>
+
+            <!--COPYRIGHT-->
+            <div id="copyright">
+                &copy; 2015 eventer. Site by
+                <a href="https://github.com/grand-canyon" title="Site by Grand Canyon">Grand Canyon</a> /
+                <a href="https://github.com/grand-canyon/Eventer"><i class="fa fa-github"></i> Open Source System</a>
+            </div>
         </footer>
     </div>
 
