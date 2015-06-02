@@ -1,12 +1,14 @@
 ﻿@using System.Globalization
 @using Eventer.Models
 
-@foreach (var e in Model)
-{
-    <div class="post">
-        <a class="thumbLink" href="@Url.Action("Show", "Events", new { date = e.Date.Date.ToString("MM-dd-yyyy"), slug = e.UrlSlug })" title="@e.Title">
-            <img width="600" height="350" src="@e.Image" alt="@e.Title" />
+<div class="post">
+
+    @foreach (var e in Model)
+    {
+        <a class="thumbLink" href="@Url.Action("Show", "Events", new {date = e.Date.Date.ToString("MM-dd-yyyy"), e.Slug})" ti title="@e.Title">
+            <img width="600" height="350" src="@e.Image" alt="@e.Title"/>
         </a>
+        
         <a class="dateInfo" href="@Url.Action("Index", "Events", new { date = e.Date.Date.ToString("MM-dd-yyyy") })">
             <div class="dayInfo">@e.Date.Day</div>
             <div class="timeInfo">@e.Date.DayOfWeek @e.Date.Hour</div>
@@ -14,7 +16,9 @@
         </a>
 
         <div class="listContent">
-            <h2 class="posttitle"><a href="@Url.Action("Show", "Events", new { date = e.Date.Date.ToString("MM-dd-yyyy"), slug = e.UrlSlug })" rel="bookmark" title="@e.Title">@e.Title</a></h2>
+            <h2 class="posttitle">
+                <a href="@Url.Action("Show", "Events", new { date = e.Date.Date.ToString("MM-dd-yyyy"), e.Slug })" re rel="bookmark" title="@e.Title">@e.Title</a>
+            </h2>
 
             <div class="smallMeta">
                 <i class="fa fa-tag">
@@ -35,7 +39,9 @@
                 }
             </div>
 
-            <p>@e.Description &#8230; <a href="@Url.Action("Show", "Events", new { date = e.Date.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture), slug = e.UrlSlug })"> Continue &rarr;</a></p>
+            <p>@e.Description &#8230; <a href="@Url.Action("Show", "Events", new { date = e.Date.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture), e.Slug })"> Continue> Continue &rarr;</a></p>
         </div>
-    </div>
-}
+        <div class="clearfix"></div>
+    }
+
+</div>

@@ -11,6 +11,7 @@
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapRoute(
                 name: "ByDate",
                 url: "Events/{action}/{date}/{slug}",

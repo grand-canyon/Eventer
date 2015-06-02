@@ -53,14 +53,14 @@ namespace Eventer.Data.Migrations
         {
             var tags = new List<Tag>
             {
-                new Tag {Name = "Free", UrlSlug = "free"},
-                new Tag {Name = "Experience", UrlSlug = "experience"},
-                new Tag {Name = "Jobs", UrlSlug = "jobs"},
-                new Tag {Name = "Programming", UrlSlug = "programming"},
-                new Tag {Name = "Android", UrlSlug = "android"},
-                new Tag {Name = "Development", UrlSlug = "development"},
-                new Tag {Name = "Software", UrlSlug = "software"},
-                new Tag {Name = "Event", UrlSlug = "event"}
+                new Tag {Name = "Free", Slug = "free"},
+                new Tag {Name = "Experience", Slug = "experience"},
+                new Tag {Name = "Jobs", Slug = "jobs"},
+                new Tag {Name = "Programming", Slug = "programming"},
+                new Tag {Name = "Android", Slug = "android"},
+                new Tag {Name = "Development", Slug = "development"},
+                new Tag {Name = "Software", Slug = "software"},
+                new Tag {Name = "Event", Slug = "event"}
             };
 
             foreach (var tag in tags)

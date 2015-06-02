@@ -69,6 +69,29 @@
         }
 
         [HttpGet]
+        public ActionResult Tag(string slug)
+        {
+            var tags = this.Data.Tags
+                .Find(t => t.Slug == slug)
+                .Select(t => t.Slug)
+                .ToList();
+
+            var events = this.Data.Events.All()
+                .Where(e => e.Tags.Any(t => tags.Contains(t.Slug)))
+                .Project().To<EventViewModel>()
+                .ToList();
+
+            if (!events.Any())
+            {
+                return View("PageNotFound");
+            }
+
+            ViewBag.Title = slug;
+
+            return View("Index", events);
+        }
+
+        [HttpGet]
         public ActionResult Submit()
         {
             return View();
