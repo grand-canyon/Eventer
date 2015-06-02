@@ -19,33 +19,26 @@
 <!--FILTER-->
 <div id="filter" class="blackBar">
     <ul>
-        <li><a class="active" href="#">Events</a></li>
-        <li>
-            <a href="#">Concerts</a>
-        </li>
+        <li><a class="active allEvents" href="#">All events</a></li>
+        @foreach (var c in ViewBag.cats)
+        {
+            <li class="cat-item cat-item-@c.Id"><a class="active" href="#">@c.Name</a></li>
+        }
     </ul>
 </div><!--end filter-->
-
 <!--DATE LIST-->
 <ul id="dateList">
     @foreach (var e in Model)
     {
-        <li class="box monthYear">
-            <a class="dateLink" href="#">
-                <span>Jun</span><br />
-                2015
-            </a>
-        </li>
-        <li class="box">
-            <a href="#">
-                <span class="theDay">02</span><br />
+        <li class="box postEvent cat-item-@e.Category.Id">
+            <a href="/Events/Show/@e.Date.Month-@e.Date.Day-@e.Date.Year/@e.Slug">
+                <span class="theDay">@e.Date.Day.@e.Date.Month</span><br />
                 <p class="theTitle">
-                    <span>Tue @@ 4:42 am</span><br />
-                    How To Be Better Than You
+                    <span>@e.Date.Hour:@e.Date.Minute</span><br />
+                    @e.Title
                 </p>
             </a>
         </li>
     }
-
     <li class="box" id="theEnd">The End.</li>
 </ul><!--end date list-->

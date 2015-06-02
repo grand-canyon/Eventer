@@ -34,7 +34,7 @@
 
         public EventStatus Status { get; set; }
 
-        public string UrlSlug { get; set; }
+        public string Slug { get; set; }
 
         public Category Category { get; set; }
 
