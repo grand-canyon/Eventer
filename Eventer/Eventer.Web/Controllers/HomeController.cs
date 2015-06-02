@@ -4,6 +4,7 @@
     using System.Net;
     using System.Net.Mail;
     using System.Web.Mvc;
+    using System;
 
     using AutoMapper.QueryableExtensions;
 
@@ -19,7 +20,9 @@
 
         public ActionResult Index()
         {
-            var events = this.Data.Events.All().Project().To<EventViewModel>().ToList();
+            var events = this.Data.Events.All().Where(e => e.Date >= DateTime.Today).Project().To<EventViewModel>().ToList();
+            var categories = events.Select(e => e.Category).ToList();
+            ViewBag.cats = categories;
 
             return View(events);
         }
