@@ -1,4 +1,4 @@
-﻿namespace Eventer.Web.Constraints
+﻿namespace Eventer.Web.Infrastructure.Constraints
 {
     using System;
     using System.Web;

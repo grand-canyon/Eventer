@@ -1,8 +1,8 @@
-﻿namespace Eventer.Web.Contracts
+﻿namespace Eventer.Web.Infrastructure.Mappings
 {
     using AutoMapper;
 
-    public interface IMapping
+    public interface IHaveCustomMapping
     {
         void CreateMappings(IConfiguration configuration);
     }

@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
-@model List<Eventer.Models.Event>
+@using Eventer.Models
+@model List<Eventer.Web.ViewModels.EventViewModel>
 
 <h1>Upcoming Events</h1>
 
@@ -27,7 +28,7 @@
                 </i>
                 <i class="fa fa-folder"> @e.Category.Name</i>
                 <i class="fa fa-comment"> @e.Comments.Count</i>
-                @if (e.IsActive)
+                @if (e.Status == EventStatus.Open)
                 {
                     <i class="fa fa-bolt"> Active</i>
                 }

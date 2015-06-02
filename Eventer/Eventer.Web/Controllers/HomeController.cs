@@ -1,10 +1,11 @@
 ﻿namespace Eventer.Web.Controllers
 {
-    using System;
     using System.Linq;
     using System.Net;
     using System.Net.Mail;
     using System.Web.Mvc;
+
+    using AutoMapper.QueryableExtensions;
 
     using Eventer.Contracts;
     using Eventer.Web.ViewModels;
@@ -18,7 +19,7 @@
 
         public ActionResult Index()
         {
-            var events = this.Data.Events.All().Where(e => e.Date > DateTime.Now).ToList();
+            var events = this.Data.Events.All().Project().To<EventViewModel>().ToList();
 
             return View(events);
         }

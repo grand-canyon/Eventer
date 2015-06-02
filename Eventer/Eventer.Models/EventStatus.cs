@@ -8,6 +8,9 @@
         Open,
 
         [Description("Closed")]
-        Closed
+        Closed,
+
+        [Description("Private")]
+        Private
     }
 }

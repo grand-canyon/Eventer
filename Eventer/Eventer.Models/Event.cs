@@ -16,7 +16,6 @@
             this.tags = new HashSet<Tag>();
             this.comments = new HashSet<Comment>();
             this.participants = new HashSet<User>();
-            this.IsActive = true;
         }
 
         [Key]
@@ -45,8 +44,6 @@
 
         [Column(TypeName = "ntext")]
         public string Image { get; set; }
-
-        public bool IsActive { get; set; }
 
         public EventStatus Status { get; set; }
 

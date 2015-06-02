@@ -7,11 +7,11 @@
 
     using AutoMapper;
 
-    using Eventer.Web.Contracts;
+    using Eventer.Web.Infrastructure.Mappings;
 
     public class AutoMapperConfig
     {
-        private Assembly assembly;
+        private readonly Assembly assembly;
 
         public AutoMapperConfig(Assembly assembly)
         {
@@ -23,7 +23,6 @@
             var types = this.assembly.GetExportedTypes();
 
             LoadStandardMappings(types);
-
             LoadCustomMappings(types);
         }
 
@@ -32,8 +31,10 @@
             var maps = from t in types
                        from i in t.GetInterfaces()
                        where
-                           i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>) && !t.IsAbstract
-                           && !t.IsInterface
+                           i.IsGenericType &&
+                           i.GetGenericTypeDefinition() == typeof(IMapFrom<>) &&
+                           !t.IsAbstract &&
+                           !t.IsInterface
                        select new { Source = i.GetGenericArguments()[0], Destination = t };
 
             foreach (var map in maps)
@@ -46,8 +47,11 @@
         {
             var maps = from t in types
                        from i in t.GetInterfaces()
-                       where typeof(IMapping).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface
-                       select (IMapping)Activator.CreateInstance(t);
+                       where
+                           typeof(IHaveCustomMapping).IsAssignableFrom(t) &&
+                           !t.IsAbstract &&
+                           !t.IsInterface
+                       select (IHaveCustomMapping)Activator.CreateInstance(t);
 
             foreach (var map in maps)
             {
