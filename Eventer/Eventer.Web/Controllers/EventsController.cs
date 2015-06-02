@@ -20,9 +20,11 @@
         public ActionResult Index(DateTime? date)
         {
             var events = date == null
-                ? this.Data.Events.All().Project().To<EventViewModel>().ToList()
-                : this.Data.Events.Find(e => e.Date == date).Project().To<EventViewModel>().ToList();
+                ? this.Data.Events.All()
+                .Project().To<EventViewModel>().ToList()
 
+                : this.Data.Events.All().Where(e => e.Date.Month == date.Value.Month)
+                .Project().To<EventViewModel>().ToList();
 
             if (!events.Any())
             {
@@ -38,7 +40,7 @@
         public ActionResult Show(DateTime date, string slug)
         {
             var ev = this.Data.Events
-                .Find(e => e.Date == date.Date && e.Slug == slug)
+                .Find(e => e.Date == date.Date || e.Slug == slug)
                 .Project().To<EventViewModel>()
                 .FirstOrDefault();
 

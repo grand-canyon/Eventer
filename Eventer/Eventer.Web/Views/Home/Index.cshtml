@@ -1,4 +1,5 @@
-﻿@model List<Eventer.Web.ViewModels.EventViewModel>
+﻿@using Eventer.Models
+@model List<Eventer.Web.ViewModels.EventViewModel>
 
 <!--SLIDER-->
 <div id="slider">
@@ -12,30 +13,50 @@
         </li>
     </ul>
 </div><!--end slider-->
-
 <!--TAGLINE-->
-<div id="tagLine">Welcome to the party. <a href="/">eventer</a> is the way to find your place!</div>
+<div id="tagLine">
+    Welcome to the party. <a href="/">eventer</a> is the way to find your place!
+</div>
 
 <!--FILTER-->
 <div id="filter" class="blackBar">
     <ul>
-        <li><a class="active allEvents" href="#">All events</a></li>
-        @foreach (var c in ViewBag.cats)
+        <li><a class="active" href="#">All events</a></li>
+
+        @foreach (var category in ViewData["Categories"] as IEnumerable<Category>)
         {
-            <li class="cat-item cat-item-@c.Id"><a class="active" href="#">@c.Name</a></li>
+            <li class="cat-item cat-item-@category.Slug"><a class="active" href="#">@category.Name</a></li>
         }
     </ul>
 </div><!--end filter-->
 <!--DATE LIST-->
 <ul id="dateList">
-    @foreach (var e in Model)
+    @for (int i = 0; i < Model.Count; i++)
     {
-        <li class="box postEvent cat-item-@e.Category.Id">
-            <a href="/Events/Show/@e.Date.Month-@e.Date.Day-@e.Date.Year/@e.Slug">
-                <span class="theDay">@e.Date.Day.@e.Date.Month</span><br />
+        if (i == 0 || (i < Model.Count - 1 && Model[i].Date.Month != Model[i + 1].Date.Month))
+        {
+            <li class="box monthYear">
+                <a class="dateLink" href="/Events/Index/@Model[i].Date.ToString("MM-dd-yyyy")">
+                    <span>@Model[i].Date.ToString("Y")</span>
+                </a>
+            </li>
+        }
+
+        if (i == Model.Count - 1 && Model[i].Date.Month != Model[i - 1].Date.Month)
+        {
+            <li class="box monthYear">
+                <a class="dateLink" href="/Events/Index/@Model[i].Date.ToString("MM-dd-yyyy")">
+                    <span>@Model[i].Date.ToString("Y")</span>
+                </a>
+            </li>
+        }
+
+        <li class="box cat-item-@Model[i].Category.Slug">
+            <a href="/Events/Show/@Model[i].Date.ToString("MM-dd-yyyy")/@Model[i].Slug">
+                <span class="theDay">@Model[i].Date.ToString("dd")</span><br />
                 <p class="theTitle">
-                    <span>@e.Date.Hour:@e.Date.Minute</span><br />
-                    @e.Title
+                    <span>@Model[i].Date.DayOfWeek.ToString().Substring(0, 3) @@ @Model[i].Date.ToString("HH:mm:ss t")</span><br />
+                    @Model[i].Description.Substring(0, 30)
                 </p>
             </a>
         </li>
