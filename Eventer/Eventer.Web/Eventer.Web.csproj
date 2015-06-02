@@ -258,7 +258,6 @@
     <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Scripts\site.js" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -334,6 +333,8 @@
     <Content Include="Views\Events\Show.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Events\Submit.cshtml" />
+    <Content Include="Views\Shared\Event\_List.cshtml" />
+    <Content Include="Views\Shared\Navigation\_Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eventer.Contracts\Eventer.Contracts.csproj">

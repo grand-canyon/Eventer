@@ -12,6 +12,6 @@
         public string Name { get; set; }
 
         [Required]
-        public string UrlSlug { get; set; }
+        public string Slug { get; set; }
     }
 }

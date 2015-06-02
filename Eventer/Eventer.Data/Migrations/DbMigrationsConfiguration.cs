@@ -32,13 +32,13 @@ namespace Eventer.Data.Migrations
         {
             var categories = new List<Category>
             {
-                new Category {Name = "Concerts & Music", UrlSlug = "concerts-music"},
-                new Category {Name = "Business & Professional", UrlSlug = "business-professional"},
-                new Category {Name = "Science & Technology", UrlSlug = "science-technology"},
-                new Category {Name = "Performing & Visual Arts", UrlSlug = "performing-visual-arts"},
-                new Category {Name = "Travel & Outdoor", UrlSlug = "travel-outdoor"},
-                new Category {Name = "Sport & Fitness", UrlSlug = "sport-fitness"},
-                new Category {Name = "Other", UrlSlug = "other"},
+                new Category {Name = "Concerts & Music", Slug = "concerts-music"},
+                new Category {Name = "Business & Professional", Slug = "business-professional"},
+                new Category {Name = "Science & Technology", Slug = "science-technology"},
+                new Category {Name = "Performing & Visual Arts", Slug = "performing-visual-arts"},
+                new Category {Name = "Travel & Outdoor", Slug = "travel-outdoor"},
+                new Category {Name = "Sport & Fitness", Slug = "sport-fitness"},
+                new Category {Name = "Other", Slug = "other"},
             };
 
             foreach (var category in categories)
@@ -84,7 +84,7 @@ namespace Eventer.Data.Migrations
                     Description = "Tribe Ibiza Launch Competition",
                     Location = "Ibiza Old Town in Ciudad de Ibiza, Spain",
                     Status = EventStatus.Open,
-                    UrlSlug = "tribe-ibiza",
+                    Slug = "tribe-ibiza",
                     Tags = new List<Tag>
                     {
                         context.Tags.FirstOrDefault(t => t.Name == "Event")
@@ -99,7 +99,7 @@ namespace Eventer.Data.Migrations
                     Description = "You are welcome to join us in the free practical course for Android development in Software University",
                     Location = "Sofia, ul. Tintyava 15-17, 2nd floor",
                     Status = EventStatus.Open,
-                    UrlSlug = "practical-course-for-android-development-in-softuni",
+                    Slug = "practical-course-for-android-development-in-softuni",
                     Tags = new List<Tag>
                     {
                         context.Tags.FirstOrDefault(t => t.Name == "Software"),

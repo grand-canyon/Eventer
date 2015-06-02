@@ -1,0 +1,38 @@
+﻿@using Eventer.Models
+
+<nav id="navigation">
+    <ul id="dropmenu">
+        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" &&
+                     ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : string.Empty)">
+            <a href="/">Home</a>
+        </li>
+        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Events" &&
+                     ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : string.Empty)">
+            @Html.ActionLink("Events", "Index", "Events")
+            <ul>
+                @foreach (var category in ViewData["Categories"] as IEnumerable<Category>)
+                {
+                    <li><a href="@Url.Action("Category", "Events", new { category.Slug} )">@category.Name</a></li>
+                }
+            </ul>
+        </li>
+        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : string.Empty)">
+            @Html.ActionLink("About", "About", "Home")
+        </li>
+        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : string.Empty)">
+            @Html.ActionLink("Contact", "Contact", "Home")
+        </li>
+        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Submit" ? "active" : string.Empty)">
+            @Html.ActionLink("Submit", "Submit", "Events")
+        </li>
+    </ul>
+</nav>
+
+<select id="selectMenu">
+    <option value="" selected="selected">Menu</option>
+    <option value="/">Home</option>
+    <option value="@Url.Action("Index", "Events")">Events</option>
+    <option value="@Url.Action("About", "Home")">About</option>
+    <option value="@Url.Action("Contact", "Home")">Contact</option>
+    <option value="@Url.Action("Submit", "Events")">Submit Event</option>
+</select>

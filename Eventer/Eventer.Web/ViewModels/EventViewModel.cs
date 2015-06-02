@@ -7,7 +7,7 @@
     using Eventer.Models;
     using Eventer.Web.Infrastructure.Mappings;
 
-    public class EventViewModel : IHaveCustomMapping
+    public class EventViewModel : IMapFrom<Event>
     {
         [Required(ErrorMessage = "Event Title is required!")]
         [StringLength(250, MinimumLength = 3)]
@@ -32,24 +32,16 @@
 
         public string Image { get; set; }
 
-        public string Status { get; set; }
+        public EventStatus Status { get; set; }
 
         public string UrlSlug { get; set; }
 
-        public string Category { get; set; }
+        public Category Category { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 
         public ICollection<User> Participants { get; set; }
-
-        public void CreateMappings(AutoMapper.IConfiguration configuration)
-        {
-            configuration.CreateMap<Event, EventViewModel>()
-                .ForMember(m => m.Category, o => o.MapFrom(e => e.Category.Name))
-                .ForMember(m => m.Status, o => o.MapFrom(e => e.Status.ToString()))
-                .ForMember(m => m.Category, o => o.MapFrom(e => e.Category.Name));
-        }
     }
 }

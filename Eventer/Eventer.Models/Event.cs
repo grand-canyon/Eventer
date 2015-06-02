@@ -48,7 +48,7 @@
         public EventStatus Status { get; set; }
 
         [Required]
-        public string UrlSlug { get; set; }
+        public string Slug { get; set; }
 
         [Required(ErrorMessage = "Event Category is required!")]
         public int CategoryId { get; set; }

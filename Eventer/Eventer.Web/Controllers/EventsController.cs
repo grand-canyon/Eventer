@@ -23,6 +23,14 @@
                 ? this.Data.Events.All().Project().To<EventViewModel>().ToList()
                 : this.Data.Events.Find(e => e.Date == date).Project().To<EventViewModel>().ToList();
 
+
+            if (!events.Any())
+            {
+                return View("PageNotFound");
+            }
+
+            ViewBag.Title = "Upcoming events";
+
             return View(events);
         }
 
@@ -30,7 +38,7 @@
         public ActionResult Show(DateTime date, string slug)
         {
             var ev = this.Data.Events
-                .Find(e => e.Date == date.Date && e.UrlSlug == slug)
+                .Find(e => e.Date == date.Date && e.Slug == slug)
                 .Project().To<EventViewModel>()
                 .FirstOrDefault();
 
@@ -40,6 +48,24 @@
             }
 
             return View(ev);
+        }
+
+        [HttpGet]
+        public ActionResult Category(string slug)
+        {
+            var events = this.Data.Events
+                .Find(e => e.Category.Slug == slug)
+                .Project().To<EventViewModel>()
+                .ToList();
+
+            if (!events.Any())
+            {
+                return View("PageNotFound");
+            }
+
+            ViewBag.Title = events.First().Category.Name;
+
+            return View("Index", events);
         }
 
         [HttpGet]

@@ -25,6 +25,12 @@
         protected User CurrentUser { get; set; }
 
         [ChildActionOnly]
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            ViewData["Categories"] = this.Data.Categories.All();
+        }
+
+        [ChildActionOnly]
         protected ActionResult RedirectToAction<TController>(Expression<Action<TController>> action) where TController : Controller
         {
             var actionBody = (MethodCallExpression)action.Body;
