@@ -4,13 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - eventer</title>
-    <meta name="description" content="Simple Event System"/>
+    <meta name="description" content="Simple Event System" />
+
+    <link href="http://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet" type="text/css">
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div id="wrapper" class="container body-content">
+
+    <div id="wrapper" class="container">
+        <div class="dotted"></div>
+
         <!--HEADER-->
         <div id="header">
             <a id="logo" href="/"><img src="~/Content/Images/logo.png" alt="eventer" /></a>
@@ -18,25 +23,36 @@
             <!--MENU-->
             <nav id="navigation">
                 <ul id="dropmenu">
-                    <li class="current-menu-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" &&
+                             ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : string.Empty)">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Events" &&
+                             ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : string.Empty)">
                         @Html.ActionLink("Events", "Index", "Events")
                         <ul>
                             <li><a href="#">Categories</a></li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Submit", "Submit", "Events")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : string.Empty)">
+                        @Html.ActionLink("About", "About", "Home")
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : string.Empty)">
+                        @Html.ActionLink("Contact", "Contact", "Home")
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Submit" ? "active" : string.Empty)">
+                        @Html.ActionLink("Submit", "Submit", "Events")
+                    </li>
                 </ul>
             </nav>
 
             <select id="selectMenu">
                 <option value="" selected="selected">Menu</option>
-                <option value="#">Home</option>
-                <option value="#">About</option>
-                <option value="#">Contacts</option>
-                <option value="#">Submit Event</option>
+                <option value="/">Home</option>
+                <option value="@Url.Action("Index", "Events")">Events</option>
+                <option value="@Url.Action("About", "Home")">About</option>
+                <option value="@Url.Action("Contact", "Home")">Contact</option>
+                <option value="@Url.Action("Submit", "Events")">Submit Event</option>
             </select><!--end menu-->
 
         </div><!--end header-->
@@ -48,7 +64,10 @@
         <footer>
             <!--SOCIAL ICONS-->
             <div id="socialIcons">
-                <!--TODO: Social Icons-->
+                <a class="fa fa-rss fa-3x" href="#"></a>
+                <a class="fa fa-facebook-square fa-3x" href="#"></a>
+                <a class="fa fa-twitter-square fa-3x" href="#"></a>
+                <a class="fa fa-youtube-square fa-3x" href="#"></a>
             </div>
 
             <!--COPYRIGHT-->

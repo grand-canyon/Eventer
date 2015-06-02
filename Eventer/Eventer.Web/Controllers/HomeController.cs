@@ -23,7 +23,7 @@
             return View(events);
         }
 
-        [OutputCache(NoStore = true, Duration = 24 * 60 * 60)]
+        // [OutputCache(NoStore = true, Duration = 24 * 60 * 60)]
         public ActionResult About()
         {
             var team = this.GetUsersInRole("Admin")

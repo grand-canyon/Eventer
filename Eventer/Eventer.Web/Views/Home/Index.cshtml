@@ -1,4 +1,6 @@
-﻿<!--SLIDER-->
+﻿@model List<Eventer.Web.ViewModels.EventViewModel>
+
+<!--SLIDER-->
 <div id="slider">
     <ul class="slides">
         <li>
@@ -12,7 +14,7 @@
 </div><!--end slider-->
 
 <!--TAGLINE-->
-<div id="tagLine">Welcome to the party. @Html.ActionLink("eventer", "Index", "Home") is the way to find your place!</div>
+<div id="tagLine">Welcome to the party. <a href="/">eventer</a> is the way to find your place!</div>
 
 <!--FILTER-->
 <div id="filter" class="blackBar">
@@ -24,22 +26,25 @@
     </ul>
 </div><!--end filter-->
 
-<!--DATE LIST-->
-<ul id="dateList">
-    <li class="box monthYear">
-        <a class="dateLink" href="#">
-            <span>Jun</span><br />
-            2015
-        </a>
-    </li>
-    <li class="box">
-        <a href="#">
-            <span class="theDay">02</span><br />
-            <p class="theTitle">
-                <span>Tue @@ 4:42 am</span><br />
-                How To Be Better Than You
-            </p>
-        </a>
-    </li>
-    <li class="box" id="theEnd">The End.</li>
-</ul><!--end date list-->
+@foreach (var e in Model)
+{
+    <!--DATE LIST-->
+    <ul id="dateList">
+        <li class="box monthYear">
+            <a class="dateLink" href="#">
+                <span>Jun</span><br />
+                2015
+            </a>
+        </li>
+        <li class="box">
+            <a href="#">
+                <span class="theDay">02</span><br />
+                <p class="theTitle">
+                    <span>Tue @@ 4:42 am</span><br />
+                    How To Be Better Than You
+                </p>
+            </a>
+        </li>
+        <li class="box" id="theEnd">The End.</li>
+    </ul><!--end date list-->
+}

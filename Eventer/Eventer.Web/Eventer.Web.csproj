@@ -225,6 +225,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Constraints\DateConstraint.cs" />
     <Compile Include="Contracts\IMapFrom.cs" />
     <Compile Include="Contracts\IMapping.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -254,7 +255,9 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\bg-default.png" />
+    <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Scripts\site.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -328,7 +331,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Events\Display.cshtml" />
+    <Content Include="Views\Events\Show.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Events\Submit.cshtml" />
   </ItemGroup>

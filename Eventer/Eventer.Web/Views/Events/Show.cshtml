@@ -1,0 +1,319 @@
+﻿@model Eventer.Models.Event
+@{
+    ViewBag.Title = Model.Title;
+}
+
+@*<h1>@Model.Title</h1>
+    Tags:
+    @foreach (var tag in Model.Tags)
+    {
+        <a href="/Tag/@tag.UrlSlug" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-tag"></i> @tag.Name</a>
+    }
+    <hr />
+    @if (Model.Image != null)
+    {
+        <img src="@Model.Image" alt="@Model.Title" />
+    }
+    <div class="well">
+        @Model.Description
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>Post a comment nigga</div>
+    }
+
+    @if (!Model.Comments.Any())
+    {
+        <div class="alert alert-info">
+            No comments added.
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <span>@Html.ActionLink("Log in to post a comment", "Login", "Account", null, new { @class = "alert-link" })</span>
+            }
+        </div>
+    }
+    else
+    {
+        foreach (var comment in Model.Comments)
+        {
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">@comment.Author.FirstName @comment.Author.LastName (@comment.DateCreated) said:</h4>
+                    @comment.Text
+                </div>
+            </div>
+        }
+    }*@
+
+
+
+<div class="mapEmbed">
+    <iframe width="900" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?q=Key Arena, Seattle WA&amp;output=embed&amp;iwloc=near&amp;z=14"></iframe>
+</div><!--end mapEmbed-->
+
+<div class="post">
+    <div class="entry">
+
+        <h2 id="postTitle">When Did Robots Take Control?</h2>
+        <div id="crumbs"><a href="http://themes.themolitor.com/eventure">Home</a> &nbsp;/&nbsp; <a href="http://themes.themolitor.com/eventure/category/events/">Events</a> &nbsp;/&nbsp; <span class="current">Current Page</span></div>
+
+        <div class="socialButton">
+            <a href="http://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        </div>
+        <div class="socialButton">
+            <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+            <g:plusone size="medium" count="false"></g:plusone>
+        </div>
+        <div class="socialButton" id="facebookLike">
+            <div id="fb-root"></div>
+            <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://themes.themolitor.com/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/" send="false" layout="button_count" width="90" height="21" show_faces="true" action="like" colorscheme="light" font=""></fb:like>
+        </div>
+        <div class="clear"></div>
+
+        <div itemprop="description">
+            <p>Description</p>
+        </div>
+    </div><!--end entry-->
+
+    <br />
+
+    <div id="commentsection">
+
+        <!--IF THERE ARE COMMENTS-->
+        <h3 id="comments">Comments</h3>
+
+        <ol class="commentlist">
+            <li>
+                <div class="comment-body">
+                    <div class="comment-author">
+                        <img alt="" src="http://1.gravatar.com/avatar/18582581bd92b433ded84dbffbb5fea8?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G" class="avatar" height="38" width="38" />
+                        <cite class="fn"><a href='http://themolitor.com' rel='external nofollow' class='url'>The Molitor</a></cite>
+                        <span class="says">says:</span>
+                    </div>
+
+                    <div class="comment-meta commentmetadata">
+                        <a href="http://themes.themolitor.com/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/#comment-842">
+                            January 28, 2014 at 1:20 pm
+                        </a>
+                    </div>
+
+                    <p>Comment</p>
+
+                    <div class="reply"><a class="comment-reply-link" href="#" onclick='return addComment.moveForm( "div-comment-842", "842", "respond", "40" )' aria-label="Reply to The Molitor">Reply</a></div>
+                </div>
+                <ul class="children">
+                    <!-- #comment-## -->
+                </ul><!-- .children -->
+            </li><!-- #comment-## -->
+        </ol>
+
+        <div class="navigation">
+            <div class="alignleft"></div>
+            <div class="alignright"></div>
+        </div>
+
+        <!--IF COMMENTS ARE OPEN-->
+        <div id="respond">
+
+            <h3>Leave a Reply</h3>
+
+            <div class="cancel-comment-reply">
+                <small><a rel="nofollow" id="cancel-comment-reply-link" href="/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/#respond" style="display:none;">Click here to cancel reply.</a></small>
+            </div>
+
+            <!--IF USER MUST BE LOGGED IN-->
+
+            <form action="http://themes.themolitor.com/eventure/wp-comments-post.php" method="post" id="commentform">
+
+                <!--IF USER IS LOGGED IN-->
+                <p>
+                    <input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+                    <label for="author"><small>Name (required)</small></label>
+                </p>
+
+                <p>
+                    <input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+                    <label for="email"><small>Email (will not be published) (required)</small></label>
+                </p>
+
+                <p>
+                    <input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+                    <label for="url"><small>Website</small></label>
+                </p>
+
+
+                <p>
+                    <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
+                </p>
+
+                <p>
+                    <input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+                    <input type='hidden' name='comment_post_ID' value='40' id='comment_post_ID' />
+                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                </p>
+
+
+            </form>
+
+        </div><!--end respond-->
+    </div>
+
+</div><!--end post-->
+<div id="postDetails">
+    <ul id="detailsTabs">
+        <li class="activeTab">Details</li>
+        <li>Gallery</li>
+        <li>Tags</li>
+        <li>More</li>
+    </ul>
+
+    <ul id="metaStuff">
+        <!--FIRST-->
+        <li class="currentInfo">
+
+            <h2 id="postTitle">When Did Robots Take Control?</h2>
+            <div id="crumbs"><a href="http://themes.themolitor.com/eventure">Home</a> &nbsp;/&nbsp; <a href="http://themes.themolitor.com/eventure/category/events/">Events</a> &nbsp;/&nbsp; <span class="current">Current Page</span></div>
+
+
+            <div class="smallMeta">
+                <i class="icon-exclamation red"></i>Event Expired<br />					<i class="icon-calendar"></i><time itemprop="startDate" datetime="2015-04-01T13:00">Wednesday, April 1st, 2015</time><br />
+                <i class="icon-time"></i>1:00 pm<br />
+                <i class="icon-refresh"></i>2 Hours<br />					<i class="icon-map-marker"></i><a target="blank" href="http://maps.google.com/?q=Key+Arena,+Seattle+WA&amp;z=14"><span itemprop="location" itemscope itemtype="http://data-vocabulary.org/Organization">Key Arena, Seattle WA</span></a><br />					<i class="icon-money"></i><span itemprop="price">Free</span><br />					<i class="icon-group"></i>All Ages<br />					<i class="icon-link"></i><a target="_blank" href="http://ticketmaster.com">http://ticketmaster.com</a><br />					<i class="icon-folder-close"></i><a href="http://themes.themolitor.com/eventure/category/events/" rel="category tag">Events</a>, <a href="http://themes.themolitor.com/eventure/category/featured/" rel="category tag">Featured</a>, <a href="http://themes.themolitor.com/eventure/category/events/seminars/" rel="category tag">Seminars</a><br />
+                <i class="icon-user"></i>The Molitor<br />
+                <i class="icon-comment"></i><a href="http://themes.themolitor.com/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/#comments" title="Comment on When Did Robots Take Control?">4 Comments</a><br />
+            </div>
+        </li>
+
+        <!--SECOND-->
+        <li>
+            <ul class="galleryBox">
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/robot.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/robot-50x50.jpg" class="attachment-small" alt="robot" /></a></li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/72582_Papel-de-Parede-Transformers-Decepticon-Blackout_1280x960.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/72582_Papel-de-Parede-Transformers-Decepticon-Blackout_1280x960-50x50.jpg" class="attachment-small" alt="72582_Papel-de-Parede-Transformers-Decepticon-Blackout_1280x960" /></a></li>
+                <li class="wrapperli">
+                    <a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/4099636259_83988556d1_o.jpg">
+                        <img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/4099636259_83988556d1_o-50x50.jpg" class="attachment-small" alt="Part of the Deep Forest team of bots, this recycled, reprogrammed and freed robot of war came to be known by the villagers as &quot;Monty the Lumberjack&quot;.
+
+Spending his time managing a forest deemed too inaccessible and dangerous for standard woodcutting, he c" />
+                    </a>
+                </li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/chromehounds.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/chromehounds-50x50.jpg" class="attachment-small" alt="chromehounds" /></a></li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/Armstrong-Mod-7_3-320-640-240-480.png"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/Armstrong-Mod-7_3-320-640-240-480-50x50.png" class="attachment-small" alt="Armstrong-Mod-7_3-320-640-240-480" /></a></li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/ed-209.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/ed-209-50x50.jpg" class="attachment-small" alt="ed-209" /></a></li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/mar01_l.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/mar01_l-50x50.jpg" class="attachment-small" alt="mar01_l" /></a></li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/megatron1.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/megatron1-50x50.jpg" class="attachment-small" alt="megatron1" /></a></li>
+                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/Ravage-Decepticons.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/Ravage-Decepticons-50x50.jpg" class="attachment-small" alt="Ravage - Decepticons" /></a></li>
+            </ul>
+        </li>
+
+        <!--THIRD-->
+        <li id="theTags">
+            <a href="http://themes.themolitor.com/eventure/tag/another-tag-example/" rel="tag">Another Tag Example</a><a href="http://themes.themolitor.com/eventure/tag/events/" rel="tag">Events</a><a href="http://themes.themolitor.com/eventure/tag/hyper-tag/" rel="tag">Hyper Tag</a><a href="http://themes.themolitor.com/eventure/tag/more-tags/" rel="tag">More Tags</a><a href="http://themes.themolitor.com/eventure/tag/random-tag/" rel="tag">Random Tag</a><a href="http://themes.themolitor.com/eventure/tag/sample-tag/" rel="tag">Sample Tag</a><a href="http://themes.themolitor.com/eventure/tag/tag-example/" rel="tag">Tag Example</a><a href="http://themes.themolitor.com/eventure/tag/yet-another/" rel="tag">Yet Another</a>				<div class="clear"></div>
+        </li>
+
+        <li>
+            <div id="sidebar">
+
+                <ul>
+                    <li id="search-4" class="widget widget_search">
+                        <form method="get" id="searchform" action="http://themes.themolitor.com/eventure/">
+                            <input type="image" src="http://themes.themolitor.com/eventure/wp-content/themes/eventure/images/search.png" id="searchsubmit" alt="GO!" />
+                            <input type="text" value="Search Site" onfocus="this.value=''; this.onfocus=null;" name="s" id="s" />
+                        </form>
+                    </li>
+                    <li id="ajax-calendar-5" class="widget ajax_calendar_widget">
+                        <h3 class="widgettitle"><span>AJAX Calendar</span></h3><table id="wp-calendar">
+                            <caption>April 2015</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" title="Monday">M</th>
+                                    <th scope="col" title="Tuesday">T</th>
+                                    <th scope="col" title="Wednesday">W</th>
+                                    <th scope="col" title="Thursday">T</th>
+                                    <th scope="col" title="Friday">F</th>
+                                    <th scope="col" title="Saturday">S</th>
+                                    <th scope="col" title="Sunday">S</th>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" id="prev" class="pad">&nbsp;</td>
+                                    <td class="pad">&nbsp;</td>
+                                    <td colspan="3" id="next"><a onclick="microAjax(this.href + '?ajax=true',show_micro_ajax); return false" href="http://themes.themolitor.com/eventure/2015/06/">Jun &raquo;</a></td>
+                                </tr>
+                            </tfoot>
+
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="pad">&nbsp;</td>
+                                    <td><a href="http://themes.themolitor.com/eventure/2015/04/01/" title="When Did Robots Take Control?">1</a></td>
+                                    <td><a href="http://themes.themolitor.com/eventure/2015/04/02/" title="Where Did We Come From? Bang!">2</a></td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                    <td>9</td>
+                                    <td>10</td>
+                                    <td>11</td>
+                                    <td>12</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>14</td>
+                                    <td>15</td>
+                                    <td>16</td>
+                                    <td>17</td>
+                                    <td>18</td>
+                                    <td>19</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td><a href="http://themes.themolitor.com/eventure/2015/04/22/" title="Standing on the Shoulders of Giants">22</a></td>
+                                    <td>23</td>
+                                    <td>24</td>
+                                    <td>25</td>
+                                    <td>26</td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>28</td>
+                                    <td>29</td>
+                                    <td>30</td>
+                                    <td class="pad" colspan="3">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script type="text/javascript">
+                                function show_micro_ajax(response) { document.getElementById('wp-calendar').innerHTML = response; }
+                                function microAjax(url, cF) {
+                                    this.bF = function (caller, object) { return function () { return caller.apply(object, new Array(object)); } };
+                                    this.sC = function (object) { if (this.r.readyState == 4) { this.cF(this.r.responseText); } };
+                                    this.gR = function () {
+                                        if (window.ActiveXObject)
+                                            return new ActiveXObject('Microsoft.XMLHTTP'); else if (window.XMLHttpRequest)
+                                                return new XMLHttpRequest(); else return false;
+                                    };
+                                    if (arguments[2]) this.pb = arguments[2]; else this.pb = ""; this.cF = cF; this.url = url; this.r = this.gR(); if (this.r) {
+                                        this.r.onreadystatechange = this.bF(this.sC, this); if (this.pb != "") { this.r.open("POST", url, true); this.r.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); this.r.setRequestHeader('Connection', 'close'); } else { this.r.open("GET", url, true); }
+                                        this.r.send(this.pb);
+                                    }
+                                }
+                        </script>
+                    </li>
+                    <li id="text-3" class="widget widget_text">
+                        <h3 class="widgettitle"><span>Advertisement</span></h3>			<div class="textwidget"><a href="http://themolitor.com/eventure"><img src="http://themes.themolitor.com/eventure/files/2011/12/tf_300x250.gif" alt="ThemeForest" /></a></div>
+                    </li>
+                </ul>
+
+            </div><!--end sidebar-->
+        </li>
+
+    </ul>
+</div>

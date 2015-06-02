@@ -1,5 +1,6 @@
 ﻿namespace Eventer.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -14,17 +15,19 @@
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(DateTime? date)
         {
-            var events = this.Data.Events.All().ToList();
+            var events = date == null
+                ? this.Data.Events.All().ToList()
+                : this.Data.Events.Find(e => e.Date == date).ToList();
 
             return View(events);
         }
 
         [HttpGet]
-        public ActionResult Display(int id, string slug)
+        public ActionResult Show(DateTime date, string slug)
         {
-            var ev = this.Data.Events.Find(e => e.Id == id && e.UrlSlug == slug).FirstOrDefault();
+            var ev = this.Data.Events.Find(e => e.Date == date.Date && e.UrlSlug == slug).FirstOrDefault();
 
             if (ev == null)
             {
@@ -45,7 +48,7 @@
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction<EventsController>(x => x.Index());
+                return RedirectToAction<EventsController>(x => x.Index(null));
             }
 
             return View(e);
