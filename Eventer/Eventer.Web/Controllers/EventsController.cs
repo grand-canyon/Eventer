@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using AutoMapper.QueryableExtensions;
+
     using Eventer.Contracts;
     using Eventer.Web.ViewModels;
 
@@ -18,8 +20,8 @@
         public ActionResult Index(DateTime? date)
         {
             var events = date == null
-                ? this.Data.Events.All().ToList()
-                : this.Data.Events.Find(e => e.Date == date).ToList();
+                ? this.Data.Events.All().Project().To<EventViewModel>().ToList()
+                : this.Data.Events.Find(e => e.Date == date).Project().To<EventViewModel>().ToList();
 
             return View(events);
         }
@@ -27,7 +29,10 @@
         [HttpGet]
         public ActionResult Show(DateTime date, string slug)
         {
-            var ev = this.Data.Events.Find(e => e.Date == date.Date && e.UrlSlug == slug).FirstOrDefault();
+            var ev = this.Data.Events
+                .Find(e => e.Date == date.Date && e.UrlSlug == slug)
+                .Project().To<EventViewModel>()
+                .FirstOrDefault();
 
             if (ev == null)
             {

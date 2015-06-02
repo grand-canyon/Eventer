@@ -1,4 +1,4 @@
-﻿@model Eventer.Models.Event
+﻿@model Eventer.Web.ViewModels.EventViewModel
 @{
     ViewBag.Title = Model.Title;
 }
@@ -221,91 +221,6 @@ Spending his time managing a forest deemed too inaccessible and dangerous for st
                             <input type="image" src="http://themes.themolitor.com/eventure/wp-content/themes/eventure/images/search.png" id="searchsubmit" alt="GO!" />
                             <input type="text" value="Search Site" onfocus="this.value=''; this.onfocus=null;" name="s" id="s" />
                         </form>
-                    </li>
-                    <li id="ajax-calendar-5" class="widget ajax_calendar_widget">
-                        <h3 class="widgettitle"><span>AJAX Calendar</span></h3><table id="wp-calendar">
-                            <caption>April 2015</caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col" title="Monday">M</th>
-                                    <th scope="col" title="Tuesday">T</th>
-                                    <th scope="col" title="Wednesday">W</th>
-                                    <th scope="col" title="Thursday">T</th>
-                                    <th scope="col" title="Friday">F</th>
-                                    <th scope="col" title="Saturday">S</th>
-                                    <th scope="col" title="Sunday">S</th>
-                                </tr>
-                            </thead>
-
-                            <tfoot>
-                                <tr>
-                                    <td colspan="3" id="prev" class="pad">&nbsp;</td>
-                                    <td class="pad">&nbsp;</td>
-                                    <td colspan="3" id="next"><a onclick="microAjax(this.href + '?ajax=true',show_micro_ajax); return false" href="http://themes.themolitor.com/eventure/2015/06/">Jun &raquo;</a></td>
-                                </tr>
-                            </tfoot>
-
-                            <tbody>
-                                <tr>
-                                    <td colspan="2" class="pad">&nbsp;</td>
-                                    <td><a href="http://themes.themolitor.com/eventure/2015/04/01/" title="When Did Robots Take Control?">1</a></td>
-                                    <td><a href="http://themes.themolitor.com/eventure/2015/04/02/" title="Where Did We Come From? Bang!">2</a></td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                    <td>9</td>
-                                    <td>10</td>
-                                    <td>11</td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>14</td>
-                                    <td>15</td>
-                                    <td>16</td>
-                                    <td>17</td>
-                                    <td>18</td>
-                                    <td>19</td>
-                                </tr>
-                                <tr>
-                                    <td>20</td>
-                                    <td>21</td>
-                                    <td><a href="http://themes.themolitor.com/eventure/2015/04/22/" title="Standing on the Shoulders of Giants">22</a></td>
-                                    <td>23</td>
-                                    <td>24</td>
-                                    <td>25</td>
-                                    <td>26</td>
-                                </tr>
-                                <tr>
-                                    <td>27</td>
-                                    <td>28</td>
-                                    <td>29</td>
-                                    <td>30</td>
-                                    <td class="pad" colspan="3">&nbsp;</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <script type="text/javascript">
-                                function show_micro_ajax(response) { document.getElementById('wp-calendar').innerHTML = response; }
-                                function microAjax(url, cF) {
-                                    this.bF = function (caller, object) { return function () { return caller.apply(object, new Array(object)); } };
-                                    this.sC = function (object) { if (this.r.readyState == 4) { this.cF(this.r.responseText); } };
-                                    this.gR = function () {
-                                        if (window.ActiveXObject)
-                                            return new ActiveXObject('Microsoft.XMLHTTP'); else if (window.XMLHttpRequest)
-                                                return new XMLHttpRequest(); else return false;
-                                    };
-                                    if (arguments[2]) this.pb = arguments[2]; else this.pb = ""; this.cF = cF; this.url = url; this.r = this.gR(); if (this.r) {
-                                        this.r.onreadystatechange = this.bF(this.sC, this); if (this.pb != "") { this.r.open("POST", url, true); this.r.setRequestHeader('Content-type', 'application/x-www-form-urlencoded'); this.r.setRequestHeader('Connection', 'close'); } else { this.r.open("GET", url, true); }
-                                        this.r.send(this.pb);
-                                    }
-                                }
-                        </script>
                     </li>
                     <li id="text-3" class="widget widget_text">
                         <h3 class="widgettitle"><span>Advertisement</span></h3>			<div class="textwidget"><a href="http://themolitor.com/eventure"><img src="http://themes.themolitor.com/eventure/files/2011/12/tf_300x250.gif" alt="ThemeForest" /></a></div>

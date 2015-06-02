@@ -26,9 +26,9 @@
                         @tag.Name // TODO
                     }
                 </i>
-                <i class="fa fa-folder"> @e.Category.Name</i>
+                <i class="fa fa-folder"> @e.Category</i>
                 <i class="fa fa-comment"> @e.Comments.Count</i>
-                @if (e.Status == EventStatus.Open)
+                @if (e.Status == EventStatus.Open.ToString())
                 {
                     <i class="fa fa-bolt"> Active</i>
                 }

@@ -26,10 +26,10 @@
     </ul>
 </div><!--end filter-->
 
-@foreach (var e in Model)
-{
-    <!--DATE LIST-->
-    <ul id="dateList">
+<!--DATE LIST-->
+<ul id="dateList">
+    @foreach (var e in Model)
+    {
         <li class="box monthYear">
             <a class="dateLink" href="#">
                 <span>Jun</span><br />
@@ -45,6 +45,7 @@
                 </p>
             </a>
         </li>
-        <li class="box" id="theEnd">The End.</li>
-    </ul><!--end date list-->
-}
+    }
+
+    <li class="box" id="theEnd">The End.</li>
+</ul><!--end date list-->
