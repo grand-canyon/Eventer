@@ -21,9 +21,11 @@
         {
             var events = date == null
                 ? this.Data.Events.All()
+                .OrderByDescending(e => e.Date)
                 .Project().To<EventViewModel>().ToList()
 
                 : this.Data.Events.All().Where(e => e.Date.Month == date.Value.Month)
+                .OrderByDescending(e => e.Date)
                 .Project().To<EventViewModel>().ToList();
 
             if (!events.Any())
@@ -43,6 +45,11 @@
                 .Find(e => e.Date == date.Date || e.Slug == slug)
                 .Project().To<EventViewModel>()
                 .FirstOrDefault();
+            var similar = this.Data.Events
+                .All()
+                .Where(e => e.CategoryId == ev.Category.Id && e.Date >= DateTime.Today && e.Id != ev.Id)
+                .ToList();
+            ViewBag.similar = similar;
 
             if (ev == null)
             {

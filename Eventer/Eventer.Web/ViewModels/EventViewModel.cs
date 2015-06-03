@@ -9,6 +9,7 @@
 
     public class EventViewModel : IMapFrom<Event>
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = "Event Title is required!")]
         [StringLength(250, MinimumLength = 3)]
         public string Title { get; set; }
