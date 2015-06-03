@@ -8,9 +8,9 @@
             <img width="600" height="350" src="@e.Image" alt="@e.Title"/>
         </a>
         <a class="dateInfo" href="@Url.Action("Index", "Events", new {date = e.Date.Date.ToString("MM-dd-yyyy")})">
-            <div class="dayInfo">@e.Date.Day</div>
-            <div class="timeInfo">@e.Date.DayOfWeek @e.Date.Hour</div>
-            <div class="monthInfo">@e.Date.Month</div>
+            <div class="dayInfo">@e.Date.ToString("dd")</div>
+            <div class="timeInfo">@e.Date.DayOfWeek.ToString().Substring(0, 3) @@ @e.Date.ToString("HH:mm:ss t")</div>
+            <div class="monthInfo">@e.Date.ToString("Y")</div>
         </a>
 
         <div class="listContent">

@@ -1,6 +1,7 @@
-﻿@model List<Eventer.Models.User>
+﻿@using Eventer.Web.Infrastructure.Common
+@model List<Eventer.Models.User>
 
-<h1>Grand Canyon Team</h1>
+<h1>Team @Config.TeamName</h1>
 <hr />
 <div class="row">
     @foreach (var user in Model)

@@ -22,9 +22,9 @@ body {
 /* -----A TAG STUFF----- */
 
 a {
-    -moz-transition: color 0.20s all;
-    -o-transition: color 0.20s all;
-    -webkit-transition: color 0.20s all;
+    -moz-transition: color 0.20s linear;
+    -o-transition: color 0.20s linear;
+    -webkit-transition: color 0.20s linear;
     text-decoration: none;
 }
 
@@ -888,7 +888,7 @@ li.box {
     }
 
     li.box.past {
-        background-color: #fae6e6;
+        background-color: #cccccc;
     }
 
     li.box .theDay {
@@ -1243,7 +1243,6 @@ h2#postTitle {
     padding: 35px 25px;
     text-align: center;
     text-transform: uppercase;
-    width: 100px;
 }
 
 .dayInfo {
@@ -1267,12 +1266,12 @@ h2#postTitle {
     font-size: 9px;
     line-height: 9px;
     margin: 0 auto 10px;
-    padding: 5px 8px 2px;
+    padding: 5px 8px 5px;
 }
 
-.dateInfo:hover .timeInfo {
-    background: #000;
-    color: #f8f8f8;
+.dateInfo:hover {
+    background-color: #0080e8;
+    color: #000000;
 }
 
 .smallMeta {

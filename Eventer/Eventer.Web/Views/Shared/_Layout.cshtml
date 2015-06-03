@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Eventer.Web.Infrastructure.Common
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - eventer</title>
-    <meta name="description" content="Simple Event System" />
+    <title>@ViewBag.Title - @Config.AppName</title>
+    <meta name="description" content="@Config.SiteDescription" />
 
     <link href="http://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet" type="text/css">
 
@@ -18,7 +20,7 @@
 
         <!--HEADER-->
         <div id="header">
-            <a id="logo" href="/"><img src="~/Content/Images/logo.png" alt="eventer" /></a>
+            <a id="logo" href="/"><img src="~/Content/Images/logo.png" alt="@Config.AppName" /></a>
 
             <!--MENU-->
             @Html.Partial("Navigation/_Main", ViewData["Categories"])
@@ -40,8 +42,8 @@
 
             <!--COPYRIGHT-->
             <div id="copyright">
-                &copy; 2015 eventer. Site by
-                <a href="https://github.com/grand-canyon" title="Site by Grand Canyon">Grand Canyon</a> /
+                &copy; 2015 @Config.AppName. Site by
+                <a href="https://github.com/grand-canyon" title="Site by @Config.TeamName">@Config.TeamName</a> /
                 <a href="https://github.com/grand-canyon/Eventer"><i class="fa fa-github"></i> Open Source System</a>
             </div>
         </footer>

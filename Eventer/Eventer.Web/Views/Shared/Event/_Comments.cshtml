@@ -1,0 +1,82 @@
+﻿@using Eventer.Web.Infrastructure.Common
+
+<div id="commentsection">
+
+    <!--IF THERE ARE COMMENTS-->
+    <h3 id="comments">Comments</h3>
+    @if (Model.Comments.Count != 0)
+    {
+        <ol class="commentlist">
+            @foreach (var comment in Model.Comments)
+            {
+                <li>
+                    <div class="comment-body">
+                        <div class="comment-author">
+                            <img alt="" src="@Config.DefaultAvatar" class="avatar" height="38" width="38" />
+                            <cite class="fn">@comment.Author.FullName</cite>
+                            <span class="says">says:</span>
+                        </div>
+
+                        <div class="comment-meta commentmetadata">
+                            @comment.DateCreated.ToString("yy-mm-dd")
+                        </div>
+
+                        <p>@comment.Text</p>
+                    </div>
+                </li>
+                    <!-- #comment-## -->
+            }
+        </ol>
+    }
+    else
+    {
+        <div class="alert alert-info">No comments posted.</div>
+    }
+
+    <div class="navigation">
+        <div class="alignleft"></div>
+        <div class="alignright"></div>
+    </div>
+
+    <!--IF COMMENTS ARE OPEN-->
+    <div id="respond">
+
+        <h3>Leave a Comment</h3>
+
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <form method="post" id="commentform">
+                <p>
+                    <input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+                    <label for="author"><small>Name (required)</small></label>
+                </p>
+
+                <p>
+                    <input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+                    <label for="email"><small>Email (will not be published) (required)</small></label>
+                </p>
+
+                <p>
+                    <input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+                    <label for="url"><small>Website</small></label>
+                </p>
+
+
+                <p>
+                    <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
+                </p>
+
+                <p>
+                    <input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+                    <input type='hidden' name='comment_post_ID' value='40' id='comment_post_ID' />
+                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                </p>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-warning">@Html.ActionLink("Log in", "Login", "Account", new { @class = "alert-link" }) to post a comment.</div>
+        }
+
+    </div><!--end respond-->
+</div>

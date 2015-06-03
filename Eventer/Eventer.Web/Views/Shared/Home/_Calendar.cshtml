@@ -1,0 +1,45 @@
+﻿<!--FILTER-->
+<div id="filter" class="blackBar">
+    <ul>
+        <li><a class="active" href="#">All events</a></li>
+
+        @foreach (var category in ViewBag.Cats)
+        {
+            <li class="cat-item cat-item-@category.Id"><a class="active" href="#">@category.Name</a></li>
+        }
+    </ul>
+</div><!--end filter-->
+<!--DATE LIST-->
+<ul id="dateList">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        if (i == 0 || (i < Model.Count - 1 && Model[i].Date.Month != Model[i + 1].Date.Month))
+        {
+            <li class="box monthYear">
+                <a class="dateLink" href="/Events/Index/@Model[i].Date.ToString("MM-dd-yyyy")">
+                    <span>@Model[i].Date.ToString("Y")</span>
+                </a>
+            </li>
+        }
+
+        if (i == Model.Count - 1 && Model[i].Date.Month != Model[i - 1].Date.Month)
+        {
+            <li class="box monthYear">
+                <a class="dateLink" href="/Events/Index/@Model[i].Date.ToString("MM-dd-yyyy")">
+                    <span>@Model[i].Date.ToString("Y")</span>
+                </a>
+            </li>
+        }
+
+        <li class="box cat-item-@Model[i].Category.Id @(Model[i].Date < DateTime.Now ? "past" : string.Empty)">
+            <a href="@Url.Action("Show", "Events", new {date = Model[i].Date.Date.ToString("MM-dd-yyyy"), slug = Model[i].Slug})">
+                <span class="theDay">@Model[i].Date.ToString("dd")</span><br />
+                <p class="theTitle">
+                    <span>@Model[i].Date.DayOfWeek.ToString().Substring(0, 3) @@ @Model[i].Date.ToString("HH:mm:ss t")</span><br />
+                    @Model[i].Description.Substring(0, 30)
+                </p>
+            </a>
+        </li>
+    }
+    <li class="box" id="theEnd">The End.</li>
+</ul><!--end date list-->

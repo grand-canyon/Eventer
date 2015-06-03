@@ -225,6 +225,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Infrastructure\Common\Config.cs" />
     <Compile Include="Infrastructure\Constraints\DateConstraint.cs" />
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IHaveCustomMapping.cs" />
@@ -373,6 +374,9 @@
     <Content Include="Views\Shared\Event\_List.cshtml" />
     <Content Include="Views\Shared\Navigation\_Main.cshtml" />
     <Content Include="Views\Events\Submit.cshtml" />
+    <Content Include="Views\Shared\Event\_Comments.cshtml" />
+    <Content Include="Views\Shared\Event\_Details.cshtml" />
+    <Content Include="Views\Shared\Home\_Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eventer.Contracts\Eventer.Contracts.csproj">

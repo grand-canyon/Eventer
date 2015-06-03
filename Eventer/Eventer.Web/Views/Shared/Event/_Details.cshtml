@@ -1,0 +1,83 @@
+﻿@model Eventer.Web.ViewModels.EventViewModel
+
+<div id="postDetails">
+    <ul id="detailsTabs">
+        <li class="activeTab">Details</li>
+        <li>Participants</li>
+        <li>Tags</li>
+        <li>Similar</li>
+    </ul>
+
+    <ul id="metaStuff">
+        <!--FIRST-->
+        <li class="currentInfo">
+            <div class="smallMeta">
+                <i class="fa fa-calendar"></i> @Model.Date.ToString("D") <br />
+                <i class="fa fa-clock-o"></i> @Model.Date.TimeOfDay<br />
+                <i class="fa fa-refresh"></i> @Model.Duration.ToString("g") <br />
+                <i class="fa fa-map-marker"></i> @Model.Location<br />
+                <i class="fa fa-folder"></i> @Model.Category.Name<br />
+                <i class="fa fa-comment"></i> @Model.Comments.Count comments<br />
+
+                @if (Model.Date < DateTime.Now)
+                {
+                    <i class="fa fa-times"></i> <span>The event has already ended.</span><br />
+                }
+                else
+                {
+                    <i class="fa fa-bolt"></i> <span>The event is active!</span><br />
+                }
+                @if (Model.Limit > Model.Participants.Count || Model.Limit == null)
+                {
+                    <i class="fa fa-user-plus"></i> <span>There still are @(Model.Limit - Model.Participants.Count) slots for this event.</span><br />
+                }
+                else
+                {
+                    <i class="fa fa-user-times"></i> <span>There are no spots left for the event.</span><br />
+                }
+            </div>
+        </li>
+
+        <!--SECOND-->
+        <li>
+            @if (Model.Participants.Count != 0)
+            {
+                <i class="fa fa-users"></i>
+                foreach (var user in Model.Participants)
+                {
+                    @(user.UserName + " ");
+                }
+            }
+            else
+            {
+                <div class="alert alert-info"> No one is participating yet. You can be the first!</div>
+            }
+        </li>
+
+        <!--THIRD-->
+        <li id="theTags">
+            @foreach (var tag in Model.Tags)
+            {
+                @Html.ActionLink(tag.Name, "Tag/" + tag.Slug, "Events", new { @rel = "tag" })
+            }
+            <div class="clear"></div>
+        </li>
+
+        <li>
+            @if (ViewBag.similar.Count != 0)
+            {
+                <ul>
+                    @foreach (var ev in ViewBag.similar)
+                    {
+                        <li><a href="Events/Show/@ev.Date.ToString("mm-dd-yyyy")/@ev.Slug">@ev.Title</a></li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <div class="alert alert-info">No similar events for now.</div>
+            }
+        </li>
+
+    </ul>
+</div>
