@@ -332,9 +332,9 @@
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Events\Show.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
-    <Content Include="Views\Events\Submit.cshtml" />
     <Content Include="Views\Shared\Event\_List.cshtml" />
     <Content Include="Views\Shared\Navigation\_Main.cshtml" />
+    <Content Include="Views\Events\Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eventer.Contracts\Eventer.Contracts.csproj">

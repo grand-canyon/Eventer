@@ -1612,9 +1612,8 @@ cite.fn {
 
 /*---FORM STUFF---*/
 
-select, input[type="file"], input[type="email"], input[type="text"], input[type="password"] {
+select, input[type="file"], input[type="email"], input[type="text"], input[type="password"], input[type="number"], input[type="datetime"] {
     -moz-border-radius: 15px;
-    /*FIX CHROM BUG*/
     -webkit-appearance: none;
     -webkit-border-radius: 15px;
     background: #eee;

@@ -100,6 +100,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Submit(EventViewModel e)
         {
             if (ModelState.IsValid)
