@@ -13,6 +13,12 @@
 
 
             routes.MapRoute(
+                name: "JoinEvent",
+                url: "Join/{id}",
+                defaults: new { controller = "Events", action = "Join" }
+            );
+
+            routes.MapRoute(
                 name: "ByDate",
                 url: "Events/{action}/{date}/{slug}",
                 defaults: new { controller = "Events", action = "Show", slug = UrlParameter.Optional },

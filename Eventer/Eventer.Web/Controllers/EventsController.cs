@@ -1,4 +1,7 @@
-﻿namespace Eventer.Web.Controllers
+﻿using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
+
+namespace Eventer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -36,6 +39,33 @@
             ViewBag.Title = "Upcoming events";
 
             return View(events);
+        }
+
+        public ActionResult Join(int id)
+        {
+            var ev = this.Data.Events.Find(e => e.Id == id).FirstOrDefault();
+            if (ev == null)
+            {
+                return View("PageNotFound");
+            }
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                ViewBag.ErrorMessage = "You need to log in to join the event!";
+                return View("Error");
+            }
+
+            if (ev.Participants.FirstOrDefault(p => p.UserName == User.Identity.GetUserName()) != null)
+            {
+                ViewBag.ErrorMessage = "You have already joined the event!";
+                return View("Error");
+            }
+
+            var currentUser = this.Data.Users.Find(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ev.Participants.Add(currentUser);
+            this.Data.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         [HttpGet]

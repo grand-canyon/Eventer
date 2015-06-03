@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
 @model Eventer.Web.ViewModels.EventViewModel
 
 <div class="mapEmbed">
@@ -28,10 +29,11 @@
         {
             <div class="alert alert-danger">The event already happened on @Model.Date.ToString("g")</div>
         }
-        else if (Model.Limit == null || Model.Limit > Model.Participants.Count)
+        else if ((Model.Limit == null || Model.Limit > Model.Participants.Count) &&
+            User.Identity.IsAuthenticated &&
+            Model.Participants.FirstOrDefault(u => u.UserName == User.Identity.GetUserName()) == null)
         {
-            @Html.ActionLink("Join the event", "Join/" + Model.Id, null, new { @class = "btn btn-success" })
-            <br /><br />
+            @Html.ActionLink("Join the event", "Join", new { id = Model.Id }, new { @class = "btn btn-success btn-lg", @style = "margin-bottom: 10px;" })
         }
 
         <div itemprop="description">
