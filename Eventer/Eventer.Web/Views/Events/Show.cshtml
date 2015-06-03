@@ -1,9 +1,6 @@
 ﻿@using System.Web.Mvc.Html
-@using Eventer.Web.ViewModels
 @model Eventer.Web.ViewModels.EventViewModel
-@{
-    ViewBag.Title = Model.Title;
-}
+
 <div class="mapEmbed">
     <iframe width="900" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?q=@HttpUtility.UrlDecode(Model.Location)&amp;output=embed&amp;iwloc=near&amp;z=15"></iframe>
 </div><!--end mapEmbed-->
@@ -34,8 +31,8 @@
         }
         else if (Model.Limit == null || Model.Limit > Model.Participants.Count)
         {
-            @Html.ActionLink("Join the event", "Join/" + Model.Id, "Events", new {@class = "btn btn-success"})
-            <br/><br/>
+            @Html.ActionLink("Join the event", "Join/" + Model.Id, null, new { @class = "btn btn-success" })
+            <br /><br />
         }
 
         <div itemprop="description">
@@ -57,7 +54,7 @@
                     <li>
                         <div class="comment-body">
                             <div class="comment-author">
-                                <img alt="" src="http://1.gravatar.com/avatar/18582581bd92b433ded84dbffbb5fea8?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G" class="avatar" height="38" width="38" />
+                                <img alt="" src="~/Content/Images/avatar.png" class="avatar" height="38" width="38" />
                                 <cite class="fn">@comment.Author.FullName</cite>
                                 <span class="says">says:</span>
                             </div>
@@ -141,26 +138,29 @@
         <!--FIRST-->
         <li class="currentInfo">
             <div class="smallMeta">
-                <ul>
-                    <li><span>Duration: @Model.Duration.ToString("g")</span></li>
-                    @if (Model.Date > DateTime.Now)
-                    {
-                        <li><span>The event has already ended.</span></li>
-                    }
-                    else
-                    {
-                        <li><span>The event is active!</span></li>
-                    }
-                    @if (Model.Limit > Model.Participants.Count || Model.Limit == null)
-                    {
-                        <li><span>There still are @(Model.Limit - Model.Participants.Count) slots for this event.</span></li>
-                    }
-                    else
-                    {
-                        <li><span>There are no spots left for the event.</span></li>
-                    }
-                    <li>The event is @Model.Status</li>
-                </ul>
+                <i class="fa fa-calendar"></i> @Model.Date.ToString("D") <br />
+                <i class="fa fa-clock-o"></i> @Model.Date.TimeOfDay<br />
+                <i class="fa fa-refresh"></i> @Model.Duration.ToString("g") <br />
+                <i class="fa fa-map-marker"></i> @Model.Location<br />
+                <i class="fa fa-folder"></i> @Model.Category.Name<br />
+                <i class="fa fa-comment"></i> @Model.Comments.Count comments<br />
+
+                @if (Model.Date < DateTime.Now)
+                {
+                    <i class="fa fa-times"></i> <span>The event has already ended.</span><br />
+                }
+                else
+                {
+                    <i class="fa fa-bolt"></i> <span>The event is active!</span><br />
+                }
+                @if (Model.Limit > Model.Participants.Count || Model.Limit == null)
+                {
+                    <i class="fa fa-user-plus"></i> <span>There still are @(Model.Limit - Model.Participants.Count) slots for this event.</span><br />
+                }
+                else
+                {
+                    <i class="fa fa-user-times"></i> <span>There are no spots left for the event.</span><br />
+                }
             </div>
         </li>
 
@@ -168,16 +168,15 @@
         <li>
             @if (Model.Participants.Count != 0)
             {
-                <ul>
-                    @foreach (var p in Model.Participants)
-                    {
-                        <li>@p.FullName (@p.UserName)</li>
-                    }
-                </ul>
+                <i class="fa fa-users"></i>
+                foreach (var user in Model.Participants)
+                {
+                    @(user.UserName + " ");
+                }
             }
             else
             {
-                <div class="alert alert-info">Noone is participating yet. You can be the first!</div>
+            <div class="alert alert-info"> No one is participating yet. You can be the first!</div>
             }
         </li>
 
@@ -185,7 +184,7 @@
         <li id="theTags">
             @foreach (var tag in Model.Tags)
             {
-                @Html.ActionLink(tag.Name, "Tag/" + tag.Slug, "Events", new { @rel = "tag" })
+            @Html.ActionLink(tag.Name, "Tag/" + tag.Slug, "Events", new { @rel = "tag" })
             }
             <div class="clear"></div>
         </li>

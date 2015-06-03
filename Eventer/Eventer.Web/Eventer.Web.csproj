@@ -254,6 +254,7 @@
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Images\avatar.png" />
     <Content Include="Content\Images\bg-default.png" />
     <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />

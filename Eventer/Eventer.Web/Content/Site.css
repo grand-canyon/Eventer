@@ -28,7 +28,7 @@ a {
     text-decoration: none;
 }
 
-    a:hover {
+    a:hover, a:focus {
         color: #0080e8;
         text-decoration: none;
     }
@@ -252,11 +252,12 @@ a#logo {
         color: #f8f8f8;
     }
 
-    #copyright a:hover {
-        color: lightblue;
-    }
+        #copyright a:hover {
+            color: lightblue;
+        }
 
 #socialIcons {
+    padding-top: 50px;
     text-align: center;
     clear: both;
 }
@@ -266,9 +267,9 @@ a#logo {
         color: black;
     }
 
-    #socialIcons a:hover {
-        color: #0080e8;
-    }
+        #socialIcons a:hover {
+            color: #0080e8;
+        }
 
 /*---------------------------------*/
 
@@ -333,7 +334,7 @@ a#logo {
         }
 
             #dropmenu li a:hover {
-                color: white;
+                color: #f8f8f8;
                 background-color: #0080e8;
             }
 
@@ -386,9 +387,9 @@ a#logo {
             color: #f8f8f8;
         }
 
-        #dropmenu li.active > a:hover {
-            background-color: #0080e8;
-        }
+            #dropmenu li.active > a:hover {
+                background-color: #0080e8;
+            }
 
 #selectMenu {
     display: none;
@@ -762,7 +763,7 @@ html[xmlns] .slides {
     }
 
         #tagLine a:hover {
-            color: white;
+            color: #f8f8f8;
             background-color: #0080e8;
         }
 
@@ -1142,7 +1143,8 @@ ul#metaStuff .smallMeta {
     }
 
         #theTags a:hover {
-            color: #000;
+            color: #f8f8f8;
+            background-color: #0080e8;
         }
 
 body.single #titleBar {

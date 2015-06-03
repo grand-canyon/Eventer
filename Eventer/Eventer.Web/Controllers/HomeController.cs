@@ -20,9 +20,13 @@
         public ActionResult Index()
         {
             var events = this.Data.Events.All()
-                .Project().To<EventViewModel>().ToList();
+                .Project().To<EventViewModel>()
+                .ToList();
+
             var categories = events.Select(e => e.Category);
+
             ViewBag.Cats = categories;
+            ViewBag.Title = "Home";
 
             return View(events);
         }
@@ -34,11 +38,15 @@
                 .Where(x => x.UserName != "admin")
                 .ToList();
 
+            ViewBag.Title = "Our team";
+
             return View(team);
         }
 
         public ActionResult Contact()
         {
+            ViewBag.Title = "Contact";
+
             return View();
         }
 

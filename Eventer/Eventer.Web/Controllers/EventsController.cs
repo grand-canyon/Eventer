@@ -45,16 +45,20 @@
                 .Find(e => e.Date == date.Date || e.Slug == slug)
                 .Project().To<EventViewModel>()
                 .FirstOrDefault();
+
             var similar = this.Data.Events
                 .All()
                 .Where(e => e.CategoryId == ev.Category.Id && e.Date >= DateTime.Today && e.Id != ev.Id)
                 .ToList();
+
             ViewBag.similar = similar;
 
             if (ev == null)
             {
                 return View("PageNotFound");
             }
+
+            ViewBag.Title = ev.Title;
 
             return View(ev);
         }
@@ -103,6 +107,8 @@
         [HttpGet]
         public ActionResult Submit()
         {
+            ViewBag.Title = "Submit event";
+
             return View();
         }
 
