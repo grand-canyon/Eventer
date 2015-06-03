@@ -1616,12 +1616,19 @@ cite.fn {
 
 /*---FORM STUFF---*/
 
-select, input[type="file"], input[type="email"], input[type="text"], input[type="password"], input[type="number"], input[type="datetime"] {
+select,
+input[type="file"],
+input[type="email"],
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="datetime"],
+input[type="url"] {
     -moz-border-radius: 15px;
     -webkit-appearance: none;
     -webkit-border-radius: 15px;
     background: #eee;
-    border: none;
+    border: 1px solid #c8c8c8;
     border-radius: 15px;
     margin: 5px 5px 0 0;
     outline: none;
@@ -1684,6 +1691,7 @@ input[type="submit"] {
     #commentform input[type="submit"]:hover,
     input[type="submit"]:hover {
         color: #000;
+        background-color: #0080e8;
     }
 
 /*---------------------------------*/
@@ -1741,8 +1749,10 @@ input[type="submit"] {
 #primaryPostForm input[type="file"],
 #primaryPostForm input[type="email"],
 #primaryPostForm input[type="text"],
-#primaryPostForm input[type="password"] {
+#primaryPostForm input[type="password"],
+#primaryPostForm input[type="url"] {
     background: #fff;
+    border: 1px solid #c8c8c8;
 }
 
 @media screen and (max-width: 900px) {
@@ -1889,6 +1899,86 @@ p.clear {
     display: none;
 }
 
+/*---------------------------------*/
+/*------DATE PICKER---------------*/
+/*-------------------------------*/
+#ui-datepicker-div {
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.25);
+    width: 235px;
+    border-radius: 15px;
+    display: none;
+}
+
+.ui-datepicker-prev {
+    font-size: 15px;
+    float: left;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.ui-datepicker-next {
+    font-size: 15px;
+    float: right;
+    cursor: pointer;
+    padding: 5px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.ui-datepicker-title {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: serif;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 35px;
+    text-align: center;
+}
+
+.ui-datepicker-calendar {
+    empty-cells: show;
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+    .ui-datepicker-calendar th {
+        font-size: 12px;
+        padding: 3px;
+        text-align: center;
+        font-style: normal;
+        text-transform: capitalize;
+        background: none;
+        border-bottom: 5px solid #000;
+    }
+
+    .ui-datepicker-calendar td {
+        text-align: center;
+        padding: 0;
+        font-weight: bold;
+    }
+
+        .ui-datepicker-calendar td a {
+            display: block;
+            padding: 0;
+            line-height: 35px;
+            font-size: 12px;
+        }
+
+            .ui-datepicker-calendar td a:hover {
+                background: #000;
+                color: #fff;
+            }
+
+.ui-datepicker-today {
+    background: #eee;
+}
+
 /* -----CALENDAR STUFF----- */
 
 .ajax_calendar_widget h3,
@@ -1897,7 +1987,7 @@ p.clear {
 }
 
 .loading {
-    background-image: url(images/ajax-loader.gif);
+    background-image: url(~/Content/Images/loader.gif);
     background-position: right center;
     background-repeat: no-repeat;
 }

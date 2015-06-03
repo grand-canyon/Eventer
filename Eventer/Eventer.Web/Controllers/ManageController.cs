@@ -49,6 +49,8 @@
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            ViewBag.Title = "Manage";
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess
                     ? "Your password has been changed."

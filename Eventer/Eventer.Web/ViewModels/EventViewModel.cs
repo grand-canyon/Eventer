@@ -1,4 +1,6 @@
-﻿namespace Eventer.Web.ViewModels
+﻿using System.Security.AccessControl;
+
+namespace Eventer.Web.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -27,6 +29,9 @@
 
         [Required(ErrorMessage = "Event Description is required!")]
         public string Description { get; set; }
+
+        [Url(ErrorMessage = "The event link must be a valid URL")]
+        public string Link { get; set; }
 
         [Range(1, double.MaxValue)]
         public int? Limit { get; set; }

@@ -1,89 +1,104 @@
-﻿@model Eventer.Web.ViewModels.EventViewModel
+﻿@using Eventer.Models
+@model Eventer.Web.ViewModels.EventViewModel
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Submit", "Event", FormMethod.Post, new { id = "primaryPostForm" }))
 {
     @Html.AntiForgeryToken()
+
+    <h4>@ViewBag.Title</h4>
+    <hr /><br />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <p class="alignleft">
+        <!--TITLE-->
+        @Html.LabelFor(model => model.Title) <span class="red">*</span><br />
+        @Html.TextBoxFor(model => model.Title, string.Empty, new { id = "postFormTitle", @class = "required" })
+    </p>
+
+    <p class="alignleft">
+        <!--DATE & TIME-->
+        @Html.LabelFor(model => model.Date) <span class="red">*</span><br />
+        @Html.TextBoxFor(model => model.Date, string.Empty, new { id = "postDate", @class = "required dateStuff" })
+
+        <label for="postTime">Time: </label>
+        @Html.TextBoxFor(model => model.Date.TimeOfDay, string.Empty, new { id = "postTime", @class = "required dateStuff" })
+    </p>
+
+    <div class="clear"></div>
+
+    <p class="alignleft">
+        <!--DURATION-->
+        @Html.LabelFor(model => model.Duration) <span class="red">*</span><br />
+        @Html.TextBoxFor(model => model.Duration, string.Empty, new { id = "postDuration", @class = "required" })
+    </p>
+
+    <p class="alignleft">
+        <!--COST-->
+        @Html.LabelFor(model => model.Cost)<br />
+        @Html.TextBoxFor(model => model.Cost, string.Empty, new { id = "postDuration" })
+    </p>
+
+    <div class="clear"></div>
+
+    <p class="alignleft">
+        <!--LOCATION-->
+        @Html.LabelFor(model => model.Location) <span class="red">*</span><br />
+        @Html.TextBoxFor(model => model.Location, string.Empty, new { id = "postAddress", @class = "required" })
+    </p>
+
+    <p class="alignleft">
+        <!--CATEGORY-->
+        <label for="cat">Category</label> <span class="red">*</span><br />
+        <select name='cat' id='cat' class="required">
+            <option value='-1'>Select</option>
+
+            @foreach (var category in ViewData["Categories"] as IEnumerable<Category>)
+            {
+                <option class="level-0" value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </p>
+
+    <p class="alignleft">
+        <!--LINK-->
+        @Html.LabelFor(model => model.Link)<br/>
+        @Html.TextBoxFor(model => model.Link, string.Empty, new {id = "postLink"})
+    </p>
     
-    <div class="form-horizontal">
-        <h4>@ViewBag.Title</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <p class="alignleft">
+        <!--TAGS-->
+        @Html.LabelFor(model => model.Tags) <span class="formExample">- separated, by, comma</span><br />
+        @Html.TextBoxFor(model => model.Tags, string.Empty, new { id = "postTags" })
+    </p>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="clear"></div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <p class="alignleft">
+        <!--IMAGE-->
+        @Html.LabelFor(model => model.Image) <span class="formExample">- .jpg, .jpeg, .png, .gif</span><br />
+        @Html.TextBoxFor(model => model.Image, string.Empty, new { id = "thumbnail" })
+    </p>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="clear"></div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <p>
+        <!--DESCRIPTION-->
+        @Html.LabelFor(model => model.Description) <span class="red">*</span><br />
+        @Html.TextAreaFor(model => model.Description, new { id = "postContent", @class = "required", rows = 8, cols = 30 })
+    </p>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <p>
+        <!--TEST-->
+        <label for="postTest">100 + Two = <span class="red">*</span></label>
+        <input type="text" name="postTest" id="postTest" value="" class="required" />
+    </p>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Limit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Limit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Limit, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <p>
+        <!--SUBMIT-->
+        <input id="postSubmit" type="submit" value="Submit" />
+    </p>
+}
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

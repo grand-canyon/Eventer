@@ -39,6 +39,9 @@
         [Required(ErrorMessage = "Event description is required!")]
         public string Description { get; set; }
 
+        [Url]
+        public string Link { get; set; }
+
         [Range(1, int.MaxValue)]
         public int? Limit { get; set; }
 
