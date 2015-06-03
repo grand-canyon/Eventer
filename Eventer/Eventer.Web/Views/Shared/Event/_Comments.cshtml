@@ -23,8 +23,7 @@
 
                         <p>@comment.Text</p>
                     </div>
-                </li>
-                    <!-- #comment-## -->
+                </li><!-- #comment-## -->
             }
         </ol>
     }
@@ -46,22 +45,6 @@
         @if (Context.User.Identity.IsAuthenticated)
         {
             <form method="post" id="commentform">
-                <p>
-                    <input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
-                    <label for="author"><small>Name (required)</small></label>
-                </p>
-
-                <p>
-                    <input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
-                    <label for="email"><small>Email (will not be published) (required)</small></label>
-                </p>
-
-                <p>
-                    <input type="text" name="url" id="url" value="" size="22" tabindex="3" />
-                    <label for="url"><small>Website</small></label>
-                </p>
-
-
                 <p>
                     <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
                 </p>
