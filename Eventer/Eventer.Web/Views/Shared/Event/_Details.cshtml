@@ -45,7 +45,7 @@
                 <i class="fa fa-users"></i>
                 foreach (var user in Model.Participants)
                 {
-                    @(user.UserName + " ");
+                    @(user.UserName + " " + user.FirstName + " " + user.LastName);
                 }
             }
             else
