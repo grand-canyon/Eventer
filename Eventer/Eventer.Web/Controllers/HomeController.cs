@@ -7,8 +7,8 @@
 
     using AutoMapper.QueryableExtensions;
 
-    using Eventer.Contracts;
-    using Eventer.Web.ViewModels;
+    using Contracts;
+    using ViewModels;
 
     public class HomeController : BaseController
     {
@@ -21,6 +21,8 @@
         {
             var events = this.Data.Events.All()
                 .Project().To<EventViewModel>().ToList();
+            var categories = events.Select(e => e.Category);
+            ViewBag.Cats = categories;
 
             return View(events);
         }

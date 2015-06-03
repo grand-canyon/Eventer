@@ -1,62 +1,18 @@
-﻿@model Eventer.Web.ViewModels.EventViewModel
+﻿@using System.Web.Mvc.Html
+@using Eventer.Web.ViewModels
+@model Eventer.Web.ViewModels.EventViewModel
 @{
     ViewBag.Title = Model.Title;
 }
-
-@*<h1>@Model.Title</h1>
-    Tags:
-    @foreach (var tag in Model.Tags)
-    {
-        <a href="/Tag/@tag.UrlSlug" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-tag"></i> @tag.Name</a>
-    }
-    <hr />
-    @if (Model.Image != null)
-    {
-        <img src="@Model.Image" alt="@Model.Title" />
-    }
-    <div class="well">
-        @Model.Description
-    </div>
-
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div>Post a comment nigga</div>
-    }
-
-    @if (!Model.Comments.Any())
-    {
-        <div class="alert alert-info">
-            No comments added.
-            @if (!User.Identity.IsAuthenticated)
-            {
-                <span>@Html.ActionLink("Log in to post a comment", "Login", "Account", null, new { @class = "alert-link" })</span>
-            }
-        </div>
-    }
-    else
-    {
-        foreach (var comment in Model.Comments)
-        {
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">@comment.Author.FirstName @comment.Author.LastName (@comment.DateCreated) said:</h4>
-                    @comment.Text
-                </div>
-            </div>
-        }
-    }*@
-
-
-
 <div class="mapEmbed">
-    <iframe width="900" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?q=Key Arena, Seattle WA&amp;output=embed&amp;iwloc=near&amp;z=14"></iframe>
+    <iframe width="900" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/?q=@HttpUtility.UrlDecode(Model.Location)&amp;output=embed&amp;iwloc=near&amp;z=15"></iframe>
 </div><!--end mapEmbed-->
 
 <div class="post">
     <div class="entry">
 
-        <h2 id="postTitle">When Did Robots Take Control?</h2>
-        <div id="crumbs"><a href="http://themes.themolitor.com/eventure">Home</a> &nbsp;/&nbsp; <a href="http://themes.themolitor.com/eventure/category/events/">Events</a> &nbsp;/&nbsp; <span class="current">Current Page</span></div>
+        <h2 id="postTitle">@Model.Title</h2>
+        <div id="crumbs"><a href="/">Home</a> &nbsp;/&nbsp; @Html.ActionLink("Events", "Index", "Events") &nbsp;/&nbsp; @Html.ActionLink(Model.Category.Name, "Category/" + Model.Category.Slug, "Events") &nbsp;/&nbsp; <span class="current">@Model.Title</span></div>
 
         <div class="socialButton">
             <a href="http://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
@@ -68,12 +24,22 @@
         </div>
         <div class="socialButton" id="facebookLike">
             <div id="fb-root"></div>
-            <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://themes.themolitor.com/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/" send="false" layout="button_count" width="90" height="21" show_faces="true" action="like" colorscheme="light" font=""></fb:like>
+            <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="@HttpContext.Current.Request.Url.AbsoluteUri" send="false" layout="button_count" width="90" height="21" show_faces="true" action="like" colorscheme="light" font=""></fb:like>
         </div>
         <div class="clear"></div>
 
+        @if (Model.Date < DateTime.Now)
+        {
+            <div class="alert alert-danger">The event already happened on @Model.Date.ToString("g")</div>
+        }
+        else if (Model.Limit == null || Model.Limit > Model.Participants.Count)
+        {
+            @Html.ActionLink("Join the event", "Join/" + Model.Id, "Events", new {@class = "btn btn-success"})
+            <br/><br/>
+        }
+
         <div itemprop="description">
-            <p>Description</p>
+            <p>@Model.Description</p>
         </div>
     </div><!--end entry-->
 
@@ -83,31 +49,34 @@
 
         <!--IF THERE ARE COMMENTS-->
         <h3 id="comments">Comments</h3>
+        @if (Model.Comments.Count != 0)
+        {
+            <ol class="commentlist">
+                @foreach (var comment in Model.Comments)
+                {
+                    <li>
+                        <div class="comment-body">
+                            <div class="comment-author">
+                                <img alt="" src="http://1.gravatar.com/avatar/18582581bd92b433ded84dbffbb5fea8?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G" class="avatar" height="38" width="38" />
+                                <cite class="fn">@comment.Author.FullName</cite>
+                                <span class="says">says:</span>
+                            </div>
 
-        <ol class="commentlist">
-            <li>
-                <div class="comment-body">
-                    <div class="comment-author">
-                        <img alt="" src="http://1.gravatar.com/avatar/18582581bd92b433ded84dbffbb5fea8?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G" class="avatar" height="38" width="38" />
-                        <cite class="fn"><a href='http://themolitor.com' rel='external nofollow' class='url'>The Molitor</a></cite>
-                        <span class="says">says:</span>
-                    </div>
+                            <div class="comment-meta commentmetadata">
+                                @comment.DateCreated.ToString("yy-mm-dd")
+                            </div>
 
-                    <div class="comment-meta commentmetadata">
-                        <a href="http://themes.themolitor.com/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/#comment-842">
-                            January 28, 2014 at 1:20 pm
-                        </a>
-                    </div>
-
-                    <p>Comment</p>
-
-                    <div class="reply"><a class="comment-reply-link" href="#" onclick='return addComment.moveForm( "div-comment-842", "842", "respond", "40" )' aria-label="Reply to The Molitor">Reply</a></div>
-                </div>
-                <ul class="children">
+                            <p>@comment.Text</p>
+                        </div>
+                    </li>
                     <!-- #comment-## -->
-                </ul><!-- .children -->
-            </li><!-- #comment-## -->
-        </ol>
+                }
+            </ol>
+        }
+        else
+        {
+            <div class="alert alert-info">No comments posted.</div>
+        }
 
         <div class="navigation">
             <div class="alignleft"></div>
@@ -117,45 +86,44 @@
         <!--IF COMMENTS ARE OPEN-->
         <div id="respond">
 
-            <h3>Leave a Reply</h3>
+            <h3>Leave a Comment</h3>
 
-            <div class="cancel-comment-reply">
-                <small><a rel="nofollow" id="cancel-comment-reply-link" href="/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/#respond" style="display:none;">Click here to cancel reply.</a></small>
-            </div>
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <form action="http://themes.themolitor.com/eventure/wp-comments-post.php" method="post" id="commentform">
+                    <p>
+                        <input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+                        <label for="author"><small>Name (required)</small></label>
+                    </p>
 
-            <!--IF USER MUST BE LOGGED IN-->
+                    <p>
+                        <input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+                        <label for="email"><small>Email (will not be published) (required)</small></label>
+                    </p>
 
-            <form action="http://themes.themolitor.com/eventure/wp-comments-post.php" method="post" id="commentform">
-
-                <!--IF USER IS LOGGED IN-->
-                <p>
-                    <input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
-                    <label for="author"><small>Name (required)</small></label>
-                </p>
-
-                <p>
-                    <input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
-                    <label for="email"><small>Email (will not be published) (required)</small></label>
-                </p>
-
-                <p>
-                    <input type="text" name="url" id="url" value="" size="22" tabindex="3" />
-                    <label for="url"><small>Website</small></label>
-                </p>
+                    <p>
+                        <input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+                        <label for="url"><small>Website</small></label>
+                    </p>
 
 
-                <p>
-                    <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
-                </p>
+                    <p>
+                        <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
+                    </p>
 
-                <p>
-                    <input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
-                    <input type='hidden' name='comment_post_ID' value='40' id='comment_post_ID' />
-                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
-                </p>
+                    <p>
+                        <input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+                        <input type='hidden' name='comment_post_ID' value='40' id='comment_post_ID' />
+                        <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                    </p>
 
 
-            </form>
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-warning">@Html.ActionLink("Log in", "Login", "Account", new { @class = "alert-link" }) to post a comment.</div>
+            }
 
         </div><!--end respond-->
     </div>
@@ -164,70 +132,78 @@
 <div id="postDetails">
     <ul id="detailsTabs">
         <li class="activeTab">Details</li>
-        <li>Gallery</li>
+        <li>Participants</li>
         <li>Tags</li>
-        <li>More</li>
+        <li>Similar</li>
     </ul>
 
     <ul id="metaStuff">
         <!--FIRST-->
         <li class="currentInfo">
-
-            <h2 id="postTitle">When Did Robots Take Control?</h2>
-            <div id="crumbs"><a href="http://themes.themolitor.com/eventure">Home</a> &nbsp;/&nbsp; <a href="http://themes.themolitor.com/eventure/category/events/">Events</a> &nbsp;/&nbsp; <span class="current">Current Page</span></div>
-
-
             <div class="smallMeta">
-                <i class="icon-exclamation red"></i>Event Expired<br />					<i class="icon-calendar"></i><time itemprop="startDate" datetime="2015-04-01T13:00">Wednesday, April 1st, 2015</time><br />
-                <i class="icon-time"></i>1:00 pm<br />
-                <i class="icon-refresh"></i>2 Hours<br />					<i class="icon-map-marker"></i><a target="blank" href="http://maps.google.com/?q=Key+Arena,+Seattle+WA&amp;z=14"><span itemprop="location" itemscope itemtype="http://data-vocabulary.org/Organization">Key Arena, Seattle WA</span></a><br />					<i class="icon-money"></i><span itemprop="price">Free</span><br />					<i class="icon-group"></i>All Ages<br />					<i class="icon-link"></i><a target="_blank" href="http://ticketmaster.com">http://ticketmaster.com</a><br />					<i class="icon-folder-close"></i><a href="http://themes.themolitor.com/eventure/category/events/" rel="category tag">Events</a>, <a href="http://themes.themolitor.com/eventure/category/featured/" rel="category tag">Featured</a>, <a href="http://themes.themolitor.com/eventure/category/events/seminars/" rel="category tag">Seminars</a><br />
-                <i class="icon-user"></i>The Molitor<br />
-                <i class="icon-comment"></i><a href="http://themes.themolitor.com/eventure/2015/04/lorem-ipsum-dolor-sit-amet-8/#comments" title="Comment on When Did Robots Take Control?">4 Comments</a><br />
+                <ul>
+                    <li><span>Duration: @Model.Duration.ToString("g")</span></li>
+                    @if (Model.Date > DateTime.Now)
+                    {
+                        <li><span>The event has already ended.</span></li>
+                    }
+                    else
+                    {
+                        <li><span>The event is active!</span></li>
+                    }
+                    @if (Model.Limit > Model.Participants.Count || Model.Limit == null)
+                    {
+                        <li><span>There still are @(Model.Limit - Model.Participants.Count) slots for this event.</span></li>
+                    }
+                    else
+                    {
+                        <li><span>There are no spots left for the event.</span></li>
+                    }
+                    <li>The event is @Model.Status</li>
+                </ul>
             </div>
         </li>
 
         <!--SECOND-->
         <li>
-            <ul class="galleryBox">
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/robot.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/robot-50x50.jpg" class="attachment-small" alt="robot" /></a></li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/72582_Papel-de-Parede-Transformers-Decepticon-Blackout_1280x960.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/72582_Papel-de-Parede-Transformers-Decepticon-Blackout_1280x960-50x50.jpg" class="attachment-small" alt="72582_Papel-de-Parede-Transformers-Decepticon-Blackout_1280x960" /></a></li>
-                <li class="wrapperli">
-                    <a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/4099636259_83988556d1_o.jpg">
-                        <img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/4099636259_83988556d1_o-50x50.jpg" class="attachment-small" alt="Part of the Deep Forest team of bots, this recycled, reprogrammed and freed robot of war came to be known by the villagers as &quot;Monty the Lumberjack&quot;.
-
-Spending his time managing a forest deemed too inaccessible and dangerous for standard woodcutting, he c" />
-                    </a>
-                </li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/chromehounds.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/chromehounds-50x50.jpg" class="attachment-small" alt="chromehounds" /></a></li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/Armstrong-Mod-7_3-320-640-240-480.png"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/Armstrong-Mod-7_3-320-640-240-480-50x50.png" class="attachment-small" alt="Armstrong-Mod-7_3-320-640-240-480" /></a></li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/ed-209.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/ed-209-50x50.jpg" class="attachment-small" alt="ed-209" /></a></li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/mar01_l.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/mar01_l-50x50.jpg" class="attachment-small" alt="mar01_l" /></a></li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/megatron1.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/megatron1-50x50.jpg" class="attachment-small" alt="megatron1" /></a></li>
-                <li class="wrapperli"><a rel="prettyPhoto[pp_gal]" href="http://themes.themolitor.com/eventure/files/2013/04/Ravage-Decepticons.jpg"><img width="50" height="50" src="http://themes.themolitor.com/eventure/files/2013/04/Ravage-Decepticons-50x50.jpg" class="attachment-small" alt="Ravage - Decepticons" /></a></li>
-            </ul>
+            @if (Model.Participants.Count != 0)
+            {
+                <ul>
+                    @foreach (var p in Model.Participants)
+                    {
+                        <li>@p.FullName (@p.UserName)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <div class="alert alert-info">Noone is participating yet. You can be the first!</div>
+            }
         </li>
 
         <!--THIRD-->
         <li id="theTags">
-            <a href="http://themes.themolitor.com/eventure/tag/another-tag-example/" rel="tag">Another Tag Example</a><a href="http://themes.themolitor.com/eventure/tag/events/" rel="tag">Events</a><a href="http://themes.themolitor.com/eventure/tag/hyper-tag/" rel="tag">Hyper Tag</a><a href="http://themes.themolitor.com/eventure/tag/more-tags/" rel="tag">More Tags</a><a href="http://themes.themolitor.com/eventure/tag/random-tag/" rel="tag">Random Tag</a><a href="http://themes.themolitor.com/eventure/tag/sample-tag/" rel="tag">Sample Tag</a><a href="http://themes.themolitor.com/eventure/tag/tag-example/" rel="tag">Tag Example</a><a href="http://themes.themolitor.com/eventure/tag/yet-another/" rel="tag">Yet Another</a>				<div class="clear"></div>
+            @foreach (var tag in Model.Tags)
+            {
+                @Html.ActionLink(tag.Name, "Tag/" + tag.Slug, "Events", new { @rel = "tag" })
+            }
+            <div class="clear"></div>
         </li>
 
         <li>
-            <div id="sidebar">
-
+            @if (ViewBag.similar.Count != 0)
+            {
                 <ul>
-                    <li id="search-4" class="widget widget_search">
-                        <form method="get" id="searchform" action="http://themes.themolitor.com/eventure/">
-                            <input type="image" src="http://themes.themolitor.com/eventure/wp-content/themes/eventure/images/search.png" id="searchsubmit" alt="GO!" />
-                            <input type="text" value="Search Site" onfocus="this.value=''; this.onfocus=null;" name="s" id="s" />
-                        </form>
-                    </li>
-                    <li id="text-3" class="widget widget_text">
-                        <h3 class="widgettitle"><span>Advertisement</span></h3>			<div class="textwidget"><a href="http://themolitor.com/eventure"><img src="http://themes.themolitor.com/eventure/files/2011/12/tf_300x250.gif" alt="ThemeForest" /></a></div>
-                    </li>
+                    @foreach (var ev in ViewBag.similar)
+                    {
+                        <li><a href="Events/Show/@ev.Date.ToString("mm-dd-yyyy")/@ev.Slug">@ev.Title</a></li>
+                    }
                 </ul>
-
-            </div><!--end sidebar-->
+            }
+            else
+            {
+                <div class="alert alert-info">No similar events for now.</div>
+            }
         </li>
 
     </ul>

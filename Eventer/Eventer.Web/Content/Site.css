@@ -886,6 +886,10 @@ li.box {
         width: 150px;
     }
 
+    li.box.past {
+        background-color: #fae6e6;
+    }
+
     li.box .theDay {
         font-size: 45px;
         line-height: 20px;
@@ -1012,7 +1016,6 @@ iframe {
 #postDetails {
     font-family: sans-serif;
     font-size: 12px;
-    width: 300px;
 }
 
 ul#detailsTabs {
@@ -1034,7 +1037,7 @@ ul#detailsTabs {
     }
 
         ul#detailsTabs > li.activeTab {
-            background: transparent;
+            background: #f8f8f8;
             border-bottom-color: #f8f8f8;
             color: #000;
         }

@@ -23,9 +23,9 @@
     <ul>
         <li><a class="active" href="#">All events</a></li>
 
-        @foreach (var category in ViewData["Categories"] as IEnumerable<Category>)
+        @foreach (var category in ViewBag.Cats)
         {
-            <li class="cat-item cat-item-@category.Slug"><a class="active" href="#">@category.Name</a></li>
+            <li class="cat-item cat-item-@category.Id"><a class="active" href="#">@category.Name</a></li>
         }
     </ul>
 </div><!--end filter-->
@@ -51,8 +51,8 @@
             </li>
         }
 
-        <li class="box cat-item-@Model[i].Category.Slug">
-            <a href="/Events/Show/@Model[i].Date.ToString("MM-dd-yyyy")/@Model[i].Slug">
+        <li class="box cat-item-@Model[i].Category.Id @(Model[i].Date < DateTime.Now ? "past" : "")">
+            <a href="@Url.Action("Show", "Events", new { date = Model[i].Date.Date.ToString("MM-dd-yyyy"), slug = Model[i].Slug })">
                 <span class="theDay">@Model[i].Date.ToString("dd")</span><br />
                 <p class="theTitle">
                     <span>@Model[i].Date.DayOfWeek.ToString().Substring(0, 3) @@ @Model[i].Date.ToString("HH:mm:ss t")</span><br />

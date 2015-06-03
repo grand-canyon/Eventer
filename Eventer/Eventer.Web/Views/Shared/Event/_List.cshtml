@@ -21,18 +21,18 @@
                 <i class="fa fa-tag">
                     @foreach (var tag in e.Tags)
                     {
-                        @tag.Name // TODO
+                        @tag.Name @:
                     }
                 </i>
                 <i class="fa fa-folder"> @e.Category.Name</i>
                 <i class="fa fa-comment"> @e.Comments.Count</i>
                 @if (e.Status == EventStatus.Open)
                 {
-                    <i class="fa fa-bolt"> e.Status</i>
+                    <i class="fa fa-bolt"> @e.Status</i>
                 }
                 else
                 {
-                    <i class="fa fa-exclamation-circle"> e.Status</i>
+                    <i class="fa fa-exclamation-circle"> @e.Status</i>
                 }
             </div>
 

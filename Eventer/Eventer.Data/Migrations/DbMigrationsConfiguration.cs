@@ -60,7 +60,10 @@ namespace Eventer.Data.Migrations
                 new Tag {Name = "Android", Slug = "android"},
                 new Tag {Name = "Development", Slug = "development"},
                 new Tag {Name = "Software", Slug = "software"},
-                new Tag {Name = "Event", Slug = "event"}
+                new Tag {Name = "Event", Slug = "event"},
+                new Tag {Name = "Business", Slug = "business"},
+                new Tag {Name = "Social-media", Slug = "social-media"},
+                new Tag {Name = "Facebook", Slug = "facebook"}
             };
 
             foreach (var tag in tags)
@@ -105,6 +108,23 @@ namespace Eventer.Data.Migrations
                         context.Tags.FirstOrDefault(t => t.Name == "Software"),
                         context.Tags.FirstOrDefault(t => t.Name == "Android"),
                         context.Tags.FirstOrDefault(t => t.Name == "Free")
+                    }
+                },
+                new Event
+                {
+                    Title = "How to create a successfull business with Facebook?",
+                    Category = context.Categories.FirstOrDefault(c => c.Name == "Business & Professional"),
+                    Date = new DateTime(2015, 6, 15),
+                    Duration = new TimeSpan(0, 2, 30, 0),
+                    Description = "How to create a successfull business with Facebook and other social media giants like MySpace, Google+ and Tumblr",
+                    Location = "Facebook, Silicon Valley, Hacker Way, Menlo Park, CA, United States",
+                    Status = EventStatus.Open,
+                    Slug = "how-to-create-a-successfull-business-with-facebook",
+                    Tags = new List<Tag>
+                    {
+                        context.Tags.FirstOrDefault(t => t.Name == "Business"),
+                        context.Tags.FirstOrDefault(t => t.Name == "Social-media"),
+                        context.Tags.FirstOrDefault(t => t.Name == "Facebook")
                     }
                 }
             };
