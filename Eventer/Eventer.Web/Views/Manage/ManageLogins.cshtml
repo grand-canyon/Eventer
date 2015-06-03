@@ -9,14 +9,9 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() == 0)
+    if (!loginProviders.Any())
     {
-        <div>
-            <p>
-                There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
-                for details on setting up this ASP.NET application to support logging in via external services.
-            </p>
-        </div>
+        <h4>Sorry, there are no available external logins at the moment.</h4>
     }
     else
     {
@@ -25,30 +20,30 @@
             <h4>Registered Logins</h4>
             <table class="table">
                 <tbody>
-                @foreach (var account in Model.CurrentLogins)
-                {
-                    <tr>
-                        <td>@account.LoginProvider</td>
-                        <td>
-                            @if (ViewBag.ShowRemoveButton)
-                            {
-                                using (Html.BeginForm("RemoveLogin", "Manage"))
+                    @foreach (var account in Model.CurrentLogins)
+                    {
+                        <tr>
+                            <td>@account.LoginProvider</td>
+                            <td>
+                                @if (ViewBag.ShowRemoveButton)
                                 {
-                                    @Html.AntiForgeryToken()
-                                    <div>
-                                        @Html.Hidden("loginProvider", account.LoginProvider)
-                                        @Html.Hidden("providerKey", account.ProviderKey)
-                                        <input type="submit" class="btn btn-default" value="Remove" title="Remove this @account.LoginProvider login from your account"/>
-                                    </div>
+                                    using (Html.BeginForm("RemoveLogin", "Manage"))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <div>
+                                            @Html.Hidden("loginProvider", account.LoginProvider)
+                                            @Html.Hidden("providerKey", account.ProviderKey)
+                                            <input type="submit" class="btn btn-default" value="Remove" title="Remove this @account.LoginProvider login from your account" />
+                                        </div>
+                                    }
                                 }
+                                else
+                                {
+                                    @: &nbsp;
                             }
-                            else
-                            {
-                                @: &nbsp;
-                            }
-                        </td>
-                    </tr>
-                }
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         }

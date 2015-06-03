@@ -1,4 +1,7 @@
-﻿namespace Eventer.Web.Controllers
+﻿using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+
+namespace Eventer.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +18,10 @@
 
     public abstract class BaseController : Controller
     {
+        protected BaseController()
+        {
+        }
+
         protected BaseController(IEventerData data)
         {
             this.Data = data;

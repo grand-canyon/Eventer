@@ -26,7 +26,13 @@
             );
 
             routes.MapRoute(
-                name: "StaticPages",
+                name: "Manage",
+                url: "Manage/{action}",
+                defaults: new { controller = "Manage", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "Home",
                 url: "{action}",
                 defaults: new { controller = "Home" }
             );

@@ -367,12 +367,12 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\Account\_LoginPartial.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Events\Show.cshtml" />
     <Content Include="Views\Shared\PageNotFound.cshtml" />
     <Content Include="Views\Shared\Event\_List.cshtml" />
-    <Content Include="Views\Shared\Navigation\_Main.cshtml" />
+    <Content Include="Views\Shared\Home\_Navigation.cshtml" />
     <Content Include="Views\Events\Submit.cshtml" />
     <Content Include="Views\Shared\Event\_Comments.cshtml" />
     <Content Include="Views\Shared\Event\_Details.cshtml" />

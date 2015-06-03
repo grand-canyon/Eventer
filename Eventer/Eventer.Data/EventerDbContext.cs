@@ -13,12 +13,12 @@
         public const string SqlConnectionString = "Server=.;Database=Eventer;Integrated Security=True;";
 
         public EventerDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", false)
         {
         }
 
         public EventerDbContext(string connectionString = SqlConnectionString)
-            : base(connectionString)
+            : base(connectionString, false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventerDbContext, DbMigrationsConfiguration>());
         }

@@ -22,9 +22,15 @@
         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : string.Empty)">
             @Html.ActionLink("Contact", "Contact", "Home")
         </li>
-        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Submit" ? "active" : string.Empty)">
-            @Html.ActionLink("Submit", "Submit", "Events")
-        </li>
+
+        @if (Request.IsAuthenticated)
+        {
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Submit" ? "active" : string.Empty)">
+                @Html.ActionLink("Submit event", "Submit", "Events")
+            </li>
+        }
+
+        @Html.Partial("Account/_LoginPartial")
     </ul>
 </nav>
 

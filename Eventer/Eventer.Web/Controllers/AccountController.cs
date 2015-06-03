@@ -5,6 +5,7 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using Eventer.Contracts;
     using Eventer.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
@@ -12,12 +13,17 @@
     using Microsoft.Owin.Security;
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
+        {
+        }
+
+        public AccountController(IEventerData data)
+            : base(data)
         {
         }
 
@@ -45,6 +51,8 @@
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Title = "Log in";
+
             return View();
         }
 
@@ -129,6 +137,8 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Title = "Register";
+
             return View();
         }
 

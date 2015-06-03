@@ -5,6 +5,7 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using Eventer.Contracts;
     using Eventer.Web.ViewModels;
 
     using Microsoft.AspNet.Identity;
@@ -12,12 +13,17 @@
     using Microsoft.Owin.Security;
 
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
+        {
+        }
+
+        public ManageController(IEventerData data)
+            : base(data)
         {
         }
 
@@ -216,6 +222,8 @@
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
+            ViewBag.Title = "Change Password";
+
             return View();
         }
 
