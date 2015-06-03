@@ -38,9 +38,6 @@
     //WHEN PAGE LOADS...
     jQuery(window).load(function () {
 
-        //STICKY FILTER
-        jQuery("#filter").sticky({ topSpacing: 0, className: 'sticky' });
-
         //SLIDER
         jQuery('#slider').flexslider({
             pauseOnHover: true,
@@ -76,7 +73,7 @@
     });
 
     //CALENDAR LOADING
-    jQuery('.ajax_calendar_widget a').live('click', function () {
+    jQuery('.ajax_calendar_widget a').on('click', function () {
         jQuery('.ajax_calendar_widget caption').addClass('loading');
     });
 
