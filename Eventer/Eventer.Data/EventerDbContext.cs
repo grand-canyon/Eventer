@@ -19,7 +19,7 @@
         }
 
         public EventerDbContext(string connectionString = SqlConnectionString)
-            : base(connectionString, false)
+            : base("DefaultConnection", false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventerDbContext, DbMigrationsConfiguration>());
         }
