@@ -1,10 +1,12 @@
 ﻿namespace Eventer.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
+    using Microsoft.AspNet.Identity;
 
     using Contracts;
     using ViewModels;
@@ -25,11 +27,11 @@
         {
             var events = date == null
                 ? this.Data.Events.All()
-                .OrderByDescending(e => e.Date)
+                .OrderBy(e => e.Date)
                 .Project().To<EventViewModel>().ToList()
 
                 : this.Data.Events.All().Where(e => e.Date.Month == date.Value.Month)
-                .OrderByDescending(e => e.Date)
+                .OrderBy(e => e.Date)
                 .Project().To<EventViewModel>().ToList();
 
             if (!events.Any())
@@ -136,6 +138,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Submit()
         {
             ViewBag.Title = "Submit event";
@@ -144,15 +147,69 @@
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Submit(EventViewModel e)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(e);
+
+            var eventTags = new List<Tag>();
+
+            if (e.InputTags != null)
             {
-                return RedirectToAction<EventsController>(x => x.Index(null));
+                var tags = e.InputTags
+                    .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Distinct();
+
+                foreach (var tag in tags)
+                {
+                    var currentTag = this.Data.Tags.All().FirstOrDefault(t => t.Name == tag);
+
+                    if (currentTag != null)
+                    {
+                        eventTags.Add(currentTag);
+                    }
+                    else
+                    {
+                        var newTag = new Tag()
+                        {
+                            Name = tag,
+                            Slug = tag.Replace(" ", "-").ToLower()
+                        };
+
+                        this.Data.Tags.Add(newTag);
+                        eventTags.Add(newTag);
+                    }
+                }
+
+                this.Data.SaveChanges();
             }
 
-            return View(e);
+            var date = e.Date + e.Time;
+            var ev = new Event()
+            {
+                Title = e.Title,
+                Slug = e.Title.Replace(" ", "-").ToLower(),
+                Duration = e.Duration,
+                Description = e.Description,
+                Location = e.Location,
+                Date = date,
+                CategoryId = e.CategoryId,
+                Tags = eventTags,
+                Link = e.Link,
+                Image = e.Image,
+                Participants = new List<User>()
+                {
+                    this.Data.Users
+                    .Find(u => u.UserName == this.User.Identity.Name)
+                    .First()
+                }
+            };
+
+            this.Data.Events.Add(ev);;
+            this.Data.SaveChanges();
+
+            return RedirectToAction<EventsController>(x => x.Index(null));
         }
 
         [HttpGet]

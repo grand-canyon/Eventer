@@ -19,6 +19,9 @@ namespace Eventer.Web.ViewModels
         [Required(ErrorMessage = "Event Date is required!")]
         public DateTime Date { get; set; }
 
+        [Required(ErrorMessage = "Event Time is required!")]
+        public TimeSpan Time { get; set; }
+
         [Required(ErrorMessage = "The event should have duration!")]
         public TimeSpan Duration { get; set; }
 
@@ -28,6 +31,7 @@ namespace Eventer.Web.ViewModels
         public string Location { get; set; }
 
         [Required(ErrorMessage = "Event Description is required!")]
+        [StringLength(2500, MinimumLength = 30)]
         public string Description { get; set; }
 
         [Url(ErrorMessage = "The event link must be a valid URL")]
@@ -42,9 +46,15 @@ namespace Eventer.Web.ViewModels
 
         public string Slug { get; set; }
 
+        [Display(Name = "Category")]
+        [Required(ErrorMessage = "Event category is required")]
+        public int CategoryId { get; set; }
+
         public Category Category { get; set; }
 
-        public virtual ICollection<Tag> Tags { get; set; }
+        public string InputTags { get; set; }
+
+        public ICollection<Tag> Tags { get; set; }
 
         public virtual ICollection<CommentViewModel> Comments { get; set; }
 

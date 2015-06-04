@@ -21,7 +21,7 @@
         @Html.TextBoxFor(model => model.Date, string.Empty, new { id = "postDate", @class = "required dateStuff" })
 
         <label for="postTime">Time: </label>
-        @Html.TextBoxFor(model => model.Date.TimeOfDay, string.Empty, new { id = "postTime", @class = "required dateStuff" })
+        @Html.TextBoxFor(model => model.Time, string.Empty, new { id = "postTime", @class = "required dateStuff" })
     </p>
 
     <div class="clear"></div>
@@ -48,27 +48,26 @@
 
     <p class="alignleft">
         <!--CATEGORY-->
-        <label for="cat">Category</label> <span class="red">*</span><br />
-        <select name='cat' id='cat' class="required">
-            <option value='-1'>Select</option>
-
-            @foreach (var category in ViewData["Categories"] as IEnumerable<Category>)
+        @Html.LabelFor(model => model.CategoryId) <span class="red">*</span><br />
+        @Html.DropDownListFor(model => model.CategoryId, (ViewData["Categories"] as IEnumerable<Category>)
+            .Select(c => new SelectListItem
             {
-                <option class="level-0" value="@category.Id">@category.Name</option>
-            }
-        </select>
+                Text = c.Name,
+                Value = c.Id.ToString()
+            })
+        )
     </p>
 
     <p class="alignleft">
         <!--LINK-->
-        @Html.LabelFor(model => model.Link)<br/>
-        @Html.TextBoxFor(model => model.Link, string.Empty, new {id = "postLink"})
+        @Html.LabelFor(model => model.Link)<br />
+        @Html.TextBoxFor(model => model.Link, string.Empty, new { id = "postLink" })
     </p>
-    
+
     <p class="alignleft">
         <!--TAGS-->
-        @Html.LabelFor(model => model.Tags) <span class="formExample">- separated, by, comma</span><br />
-        @Html.TextBoxFor(model => model.Tags, string.Empty, new { id = "postTags" })
+        @Html.LabelFor(model => model.InputTags) <span class="formExample">- separated, by, comma</span><br />
+        @Html.TextBoxFor(model => model.InputTags, string.Empty, new { id = "postTags" })
     </p>
 
     <div class="clear"></div>

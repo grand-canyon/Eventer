@@ -42,10 +42,9 @@
         <li>
             @if (Model.Participants.Count != 0)
             {
-                <i class="fa fa-users"></i>
                 foreach (var user in Model.Participants)
                 {
-                    @(user.UserName + " " + user.FirstName + " " + user.LastName);
+                    <i class="fa fa-user"> @(user.UserName + " [" + user.FullName)]</i><br />
                 }
             }
             else

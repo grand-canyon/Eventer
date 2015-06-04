@@ -1,4 +1,6 @@
-﻿namespace Eventer.Models
+﻿using System.Security.Policy;
+
+namespace Eventer.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -11,6 +13,8 @@
         private ICollection<Comment> comments;
         private ICollection<User> participants;
 
+        private string slug;
+
         public Event()
         {
             this.tags = new HashSet<Tag>();
@@ -22,7 +26,7 @@
         public int Id { get; set; }
 
         [Required]
-        [StringLength(250, MinimumLength = 5, ErrorMessage = "Event title is required!")]
+        [StringLength(250, MinimumLength = 5)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Event Start date is required!")]
@@ -37,6 +41,7 @@
         public string Location { get; set; }
 
         [Required(ErrorMessage = "Event description is required!")]
+        [StringLength(2500, MinimumLength = 30)]
         public string Description { get; set; }
 
         [Url]
@@ -50,8 +55,17 @@
 
         public EventStatus Status { get; set; }
 
-        [Required]
-        public string Slug { get; set; }
+        public string Slug
+        {
+            get { return this.slug; }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    this.slug = this.Title.Replace(" ", "-").ToLower();
+                }
+            }
+        }
 
         [Required(ErrorMessage = "Event Category is required!")]
         public int CategoryId { get; set; }

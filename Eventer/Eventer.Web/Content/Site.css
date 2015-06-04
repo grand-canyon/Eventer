@@ -1541,6 +1541,7 @@ a.thumbLink {
 #commentsection {
     font-size: 12px;
     width: 90%;
+    margin-bottom: 50px;
 }
 
 .commentlist {
@@ -1674,6 +1675,7 @@ textarea {
     margin: 5px 0;
     padding: 8px;
     width: 90%;
+    border: 1px solid #c8c8c8;
 }
 
 #commentform input[type="submit"],
