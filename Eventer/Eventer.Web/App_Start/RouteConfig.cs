@@ -20,9 +20,8 @@
 
             routes.MapRoute(
                 name: "ByDate",
-                url: "Events/{action}/{date}/{slug}",
-                defaults: new { controller = "Events", action = "Show", slug = UrlParameter.Optional },
-                constraints: new { date = new DateConstraint() }
+                url: "Events/Show/{date}/{slug}",
+                defaults: new { controller = "Events", action = "Show"}
             );
 
             routes.MapRoute(
