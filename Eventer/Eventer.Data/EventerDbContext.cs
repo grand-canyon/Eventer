@@ -14,7 +14,7 @@
         public const string ConnectionStringAzure = "Server=ibz4rymk74.database.windows.net;Database=Eventer;Persist Security Info=True;User ID=antalya;Password=Parola123;";
 
         public EventerDbContext()
-            : base(ConnectionStringAzure, false)
+            : base("DefaultConnection", false)
         {
         }
 

@@ -15,7 +15,6 @@ namespace Eventer.Web.Controllers
     using AutoMapper;
     using Models;
     using InputModels;
-    using Microsoft.AspNet.Identity;
 
     public class EventsController : BaseController
     {
