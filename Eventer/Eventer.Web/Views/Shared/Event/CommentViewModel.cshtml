@@ -1,0 +1,17 @@
+﻿@using Eventer.Web.Infrastructure.Common
+@model Eventer.Web.ViewModels.CommentViewModel
+<li>
+    <div class="comment-body">
+        <div class="comment-author">
+            <img alt="" src="@Config.DefaultAvatar" class="avatar" height="38" width="38" />
+            <cite class="fn">@Model.Username</cite>
+            <span class="says">says:</span>
+        </div>
+
+        <div class="comment-meta commentmetadata">
+            @Model.DateCreated.ToString("yy-mm-dd")
+        </div>
+
+        <p>@Model.Text</p>
+    </div>
+</li>

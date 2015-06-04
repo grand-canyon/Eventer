@@ -42,9 +42,27 @@
     </div><!--end entry-->
 
     <br />
-
+    <!--IF THERE ARE COMMENTS-->
+    <h3 id="comments">Comments</h3>
+    <div id="loadComments">
+        <ol class="commentlist">
+            @if (Model.Comments.Any())
+            {
+                foreach (var comment in Model.Comments)
+                {
+                    @Html.Partial("Event/CommentViewModel", comment);
+                }
+            }
+            else
+            {
+            <div class="alert alert-info">No comments posted.</div>
+            }
+        </ol>
+    </div>
     @Html.Partial("Event/_Comments")
 
 </div><!--end post-->
-
 @Html.Partial("Event/_Details")
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}

@@ -46,7 +46,7 @@ namespace Eventer.Web.ViewModels
 
         public virtual ICollection<Tag> Tags { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentViewModel> Comments { get; set; }
 
         public ICollection<User> Participants { get; set; }
     }

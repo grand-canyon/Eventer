@@ -1,7 +1,4 @@
-﻿using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
-
-namespace Eventer.Web.Controllers
+﻿namespace Eventer.Web.Controllers
 {
     using System;
     using System.Linq;
@@ -9,8 +6,12 @@ namespace Eventer.Web.Controllers
 
     using AutoMapper.QueryableExtensions;
 
-    using Eventer.Contracts;
-    using Eventer.Web.ViewModels;
+    using Contracts;
+    using ViewModels;
+    using AutoMapper;
+    using Models;
+    using InputModels;
+    using Microsoft.AspNet.Identity;
 
     public class EventsController : BaseController
     {
@@ -152,6 +153,41 @@ namespace Eventer.Web.Controllers
             }
 
             return View(e);
+        }
+
+        [HttpGet]
+        public ActionResult ShowComments(int eventId)
+        {
+            var comments = this.Data.Comments.All()
+                .Where(c => c.EventId == eventId)
+                .Project()
+                .To<CommentViewModel>();
+
+            return this.PartialView("_ShowComments", comments);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostComment(CommentInputModel model)
+        {
+            if (model != null && ModelState.IsValid)
+            {
+                model.AuthorId = this.User.Identity.GetUserId();
+                model.DateCreated = DateTime.Now;
+                var comment = Mapper.Map<Comment>(model);
+                this.Data.Comments.Add(comment);
+                this.Data.SaveChanges();
+
+                var commentViewModel = this.Data.Comments
+                    .All()
+                    .Where(x => x.Id == comment.Id)
+                    .Project()
+                    .To<CommentViewModel>()
+                    .FirstOrDefault();
+                return this.PartialView("Event/CommentViewModel", commentViewModel);
+            }
+
+            return this.Json(this.ModelState);
         }
     }
 }

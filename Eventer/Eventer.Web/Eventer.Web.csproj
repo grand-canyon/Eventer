@@ -238,6 +238,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
+    <Compile Include="Infrastructure\Mappings\TypesMap.cs" />
+    <Compile Include="InputModels\CommentInputModel.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
@@ -377,6 +380,7 @@
     <Content Include="Views\Shared\Event\_Comments.cshtml" />
     <Content Include="Views\Shared\Event\_Details.cshtml" />
     <Content Include="Views\Shared\Home\_Calendar.cshtml" />
+    <Content Include="Views\Shared\Event\CommentViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eventer.Contracts\Eventer.Contracts.csproj">

@@ -1,7 +1,7 @@
 ﻿@using Eventer.Models
 @model Eventer.Web.ViewModels.EventViewModel
 
-@using (Html.BeginForm("Submit", "Event", FormMethod.Post, new { id = "primaryPostForm" }))
+@using (Html.BeginForm("Submit", "Events", FormMethod.Post, new { id = "primaryPostForm" }))
 {
     @Html.AntiForgeryToken()
 
