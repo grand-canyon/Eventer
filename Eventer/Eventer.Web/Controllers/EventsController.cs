@@ -1,4 +1,6 @@
-﻿namespace Eventer.Web.Controllers
+﻿using System.Text.RegularExpressions;
+
+namespace Eventer.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -75,9 +77,17 @@
         public ActionResult Show(DateTime date, string slug)
         {
             var ev = this.Data.Events
-                .Find(e => e.Date == date.Date || e.Slug == slug)
+                .Find(e => e.Date.Day == date.Day &&
+                    e.Date.Month == date.Month &&
+                    e.Date.Year == date.Year &&
+                    e.Slug == slug)
                 .Project().To<EventViewModel>()
                 .FirstOrDefault();
+
+            if (ev == null)
+            {
+                return View("PageNotFound");
+            }
 
             var similar = this.Data.Events
                 .All()
@@ -85,11 +95,6 @@
                 .ToList();
 
             ViewBag.similar = similar;
-
-            if (ev == null)
-            {
-                return View("PageNotFound");
-            }
 
             ViewBag.Title = ev.Title;
 
@@ -174,7 +179,7 @@
                         var newTag = new Tag()
                         {
                             Name = tag,
-                            Slug = tag.Replace(" ", "-").ToLower()
+                            Slug = Regex.Replace(Regex.Replace(Regex.Replace(tag, @"\s+", "_"), @"\W", ""),"_+","-")
                         };
 
                         this.Data.Tags.Add(newTag);
@@ -189,7 +194,7 @@
             var ev = new Event()
             {
                 Title = e.Title,
-                Slug = e.Title.Replace(" ", "-").ToLower(),
+                Slug = Regex.Replace(Regex.Replace(Regex.Replace(e.Title, @"\s+", "_"), @"\W", ""),"_+","-"),
                 Duration = e.Duration,
                 Description = e.Description,
                 Location = e.Location,
@@ -225,6 +230,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(true)]
         public ActionResult PostComment(CommentInputModel model)
         {
             if (model != null && ModelState.IsValid)

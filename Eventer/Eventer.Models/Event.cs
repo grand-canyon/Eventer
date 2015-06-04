@@ -55,17 +55,7 @@ namespace Eventer.Models
 
         public EventStatus Status { get; set; }
 
-        public string Slug
-        {
-            get { return this.slug; }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    this.slug = this.Title.Replace(" ", "-").ToLower();
-                }
-            }
-        }
+        public string Slug { get; set; }
 
         [Required(ErrorMessage = "Event Category is required!")]
         public int CategoryId { get; set; }
