@@ -13,8 +13,6 @@ namespace Eventer.Models
         private ICollection<Comment> comments;
         private ICollection<User> participants;
 
-        private string slug;
-
         public Event()
         {
             this.tags = new HashSet<Tag>();
