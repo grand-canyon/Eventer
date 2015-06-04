@@ -11,9 +11,10 @@
     public class EventerDbContext : IdentityDbContext<User>, IEventerDbContext
     {
         public const string SqlConnectionString = "Server=.;Database=Eventer;Integrated Security=True;";
+        public const string ConnectionStringAzure = "Server=ibz4rymk74.database.windows.net;Database=Eventer;Persist Security Info=True;User ID=antalya;Password=Parola123;";
 
         public EventerDbContext()
-            : base("DefaultConnection", false)
+            : base(ConnectionStringAzure, false)
         {
         }
 

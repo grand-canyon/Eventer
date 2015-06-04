@@ -1,36 +1,5 @@
-﻿@using Eventer.Web.Infrastructure.Common
-
-<div id="commentsection">
-
-    <!--IF THERE ARE COMMENTS-->
-    <h3 id="comments">Comments</h3>
-    @if (Model.Comments.Count != 0)
-    {
-        <ol class="commentlist">
-            @foreach (var comment in Model.Comments)
-            {
-                <li>
-                    <div class="comment-body">
-                        <div class="comment-author">
-                            <img alt="" src="@Config.DefaultAvatar" class="avatar" height="38" width="38" />
-                            <cite class="fn">@comment.Author.FullName</cite>
-                            <span class="says">says:</span>
-                        </div>
-
-                        <div class="comment-meta commentmetadata">
-                            @comment.DateCreated.ToString("yy-mm-dd")
-                        </div>
-
-                        <p>@comment.Text</p>
-                    </div>
-                </li><!-- #comment-## -->
-            }
-        </ol>
-    }
-    else
-    {
-        <div class="alert alert-info">No comments posted.</div>
-    }
+<<<<<<< HEAD
+﻿<div id="commentsection">
 
     <div class="navigation">
         <div class="alignleft"></div>
@@ -44,22 +13,29 @@
 
         @if (Context.User.Identity.IsAuthenticated)
         {
-            <form method="post" id="commentform">
+            using (Ajax.BeginForm("PostComment", "Events", new {EventId = Model.Id}, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "loadComments",
+                InsertionMode = InsertionMode.InsertBefore
+            }))
+            {
+                @Html.AntiForgeryToken()
                 <p>
-                    <textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea>
-                </p>
+                    <textarea name="Text" id="comment" cols="100%" rows="10" tabindex="1"></textarea>
 
-                <p>
-                    <input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
-                    <input type='hidden' name='comment_post_ID' value='40' id='comment_post_ID' />
-                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
                 </p>
-            </form>
+                <p>
+                    <input name="submit" type="submit" id="submit" tabindex="2" value="Post comment"/>
+                    <input type='hidden' name='EventId' value="@Model.Id"/>
+                </p>
+            }
         }
         else
         {
-            <div class="alert alert-warning">@Html.ActionLink("Log in", "Login", "Account", new { @class = "alert-link" }) to post a comment.</div>
+            <div class="alert alert-warning">@Html.ActionLink("Log in", "Login", "Account", new {@class = "alert-link"}) to post a comment.</div>
         }
 
-    </div><!--end respond-->
+    </div>
+    <!--end respond-->
 </div>
