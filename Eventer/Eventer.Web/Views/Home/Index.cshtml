@@ -1,4 +1,4 @@
-﻿@using Eventer.Web.Infrastructure.Common
+﻿@using Eventer.Common
 @model List<Eventer.Web.ViewModels.EventViewModel>
 
 <!--SLIDER-->
@@ -15,7 +15,7 @@
 </div><!--end slider-->
 <!--TAGLINE-->
 <div id="tagLine">
-    Welcome to the party. <a href="/">@Config.AppName</a> is the way to find your place!
+    Welcome to the party. <a href="/">@GlobalConstants.ApplicationName</a> is the way to find your place!
 </div>
 
 @Html.Partial("Home/_Calendar")

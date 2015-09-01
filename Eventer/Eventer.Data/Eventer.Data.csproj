@@ -65,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Eventer.Common\Eventer.Common.csproj">
+      <Project>{3987fc86-b7f1-4523-b86c-53a7df00e394}</Project>
+      <Name>Eventer.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Eventer.Contracts\Eventer.Contracts.csproj">
       <Project>{343200b3-469d-4f91-af90-89913c565a8e}</Project>
       <Name>Eventer.Contracts</Name>

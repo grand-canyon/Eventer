@@ -1,8 +1,9 @@
 ﻿namespace Eventer.Web.InputModels
 {
+    using System;
+
     using Models;
     using Infrastructure.Mappings;
-    using System;
 
     public class CommentInputModel : IMapTo<Comment>
     {

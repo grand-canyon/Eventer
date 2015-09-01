@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5ABFEB19-77C2-4C6A-B14A-5E6ED90AFEBA}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventer.Web", "Eventer.Web\Eventer.Web.csproj", "{90294AFE-A991-4563-BF40-26D026204063}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventer.Contracts", "Eventer.Contracts\Eventer.Contracts.csproj", "{343200B3-469D-4F91-AF90-89913C565A8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventer.Common", "Eventer.Common\Eventer.Common.csproj", "{3987FC86-B7F1-4523-B86C-53A7DF00E394}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{343200B3-469D-4F91-AF90-89913C565A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{343200B3-469D-4F91-AF90-89913C565A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{343200B3-469D-4F91-AF90-89913C565A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3987FC86-B7F1-4523-B86C-53A7DF00E394}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3987FC86-B7F1-4523-B86C-53A7DF00E394}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3987FC86-B7F1-4523-B86C-53A7DF00E394}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3987FC86-B7F1-4523-B86C-53A7DF00E394}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +61,6 @@ Global
 		{B3BAF80B-9F9C-43A9-A769-D190962EC8C8} = {4B4269F5-2D25-4E28-8919-445768C6A3BF}
 		{90294AFE-A991-4563-BF40-26D026204063} = {9635B0D8-17DC-44FC-99D9-5A03599D791B}
 		{343200B3-469D-4F91-AF90-89913C565A8E} = {5ABFEB19-77C2-4C6A-B14A-5E6ED90AFEBA}
+		{3987FC86-B7F1-4523-B86C-53A7DF00E394} = {5ABFEB19-77C2-4C6A-B14A-5E6ED90AFEBA}
 	EndGlobalSection
 EndGlobal

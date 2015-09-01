@@ -7,8 +7,6 @@
     using System.Web.Optimization;
     using System.Web.Routing;
 
-    using Eventer.Web.App_Start;
-
     public class MvcApplication : HttpApplication
     {
         protected void Application_Start()

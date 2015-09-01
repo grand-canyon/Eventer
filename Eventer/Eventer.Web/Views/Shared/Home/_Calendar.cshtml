@@ -32,7 +32,7 @@
         }
 
         <li class="box cat-item-@Model[i].Category.Id @(Model[i].Date < DateTime.Now ? "past" : string.Empty)">
-            <a href="@Url.Action("Show", "Events", new {date = Model[i].Date.Date.ToString("MM-dd-yyyy"), slug = Model[i].Slug})">
+            <a href="@Url.Action("Show", "Events", new {date = Model[i].Date.ToString("MM-dd-yyyy"), slug = Model[i].Slug})">
                 <span class="theDay">@Model[i].Date.ToString("dd")</span><br />
                 <p class="theTitle">
                     <span>@Model[i].Date.DayOfWeek.ToString().Substring(0, 3) @@ @Model[i].Date.ToString("HH:mm:ss t")</span><br />

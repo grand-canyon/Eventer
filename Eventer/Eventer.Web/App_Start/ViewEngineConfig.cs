@@ -1,4 +1,4 @@
-﻿namespace Eventer.Web.App_Start
+﻿namespace Eventer.Web
 {
     using System.Web.Mvc;
 

@@ -3,8 +3,6 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Eventer.Web.Infrastructure.Constraints;
-
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)

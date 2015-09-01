@@ -1,6 +1,4 @@
-﻿using System.Security.AccessControl;
-
-namespace Eventer.Web.ViewModels
+﻿namespace Eventer.Web.ViewModels
 {
     using System;
     using System.Collections.Generic;

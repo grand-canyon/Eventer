@@ -1,16 +1,16 @@
-using Eventer.Data;
-using Eventer.Web.App_Start;
+using Eventer.Web;
 using WebActivatorEx;
 
 [assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
-namespace Eventer.Web.App_Start
+namespace Eventer.Web
 {
     using System;
     using System.Web;
 
     using Eventer.Contracts;
+    using Eventer.Data;
     using Eventer.Data.Repositories;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;

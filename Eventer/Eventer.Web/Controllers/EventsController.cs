@@ -1,10 +1,9 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Eventer.Web.Controllers
+﻿namespace Eventer.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;

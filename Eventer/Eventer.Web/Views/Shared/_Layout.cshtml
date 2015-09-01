@@ -1,16 +1,16 @@
-﻿@using Eventer.Web.Infrastructure.Common
+﻿@using Eventer.Common
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - @Config.AppName</title>
-    <meta name="description" content="@Config.SiteDescription" />
+    <title>@ViewBag.Title - @GlobalConstants.ApplicationName</title>
+    <meta name="description" content="@GlobalConstants.ApplicationDescription" />
 
     <link href="http://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet" type="text/css">
 
-    @Styles.Render("~/Content/css")
+    <link type="text/css" rel="Stylesheet" href="~/Content/Site.css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -20,7 +20,7 @@
 
         <!--HEADER-->
         <div id="header">
-            <a id="logo" href="/"><img src="~/Content/Images/logo.png" alt="@Config.AppName" /></a>
+            <a id="logo" href="/"><img src="~/Content/Images/logo.png" alt="@GlobalConstants.ApplicationName" /></a>
 
             <!--MENU-->
             @Html.Partial("Home/_Navigation", ViewData["Categories"])
@@ -35,16 +35,16 @@
             <!--SOCIAL ICONS-->
             <div id="socialIcons">
                 <a class="fa fa-rss fa-3x" href="#"></a>
-                <a class="fa fa-facebook-square fa-3x" href="https://www.facebook.com/"></a>
-                <a class="fa fa-twitter-square fa-3x" href="https://twitter.com/"></a>
-                <a class="fa fa-youtube-square fa-3x" href="https://www.youtube.com/"></a>
+                <a class="fa fa-facebook-square fa-3x" href="@GlobalConstants.FacebookUrl"></a>
+                <a class="fa fa-twitter-square fa-3x" href="@GlobalConstants.TwitterUrl"></a>
+                <a class="fa fa-youtube-square fa-3x" href="@GlobalConstants.YouTubeUrl"></a>
             </div>
 
             <!--COPYRIGHT-->
             <div id="copyright">
-                &copy; 2015 @Config.AppName. Site by
-                <a href="https://github.com/grand-canyon" title="Site by @Config.TeamName">@Config.TeamName</a> /
-                <a href="https://github.com/grand-canyon/Eventer"><i class="fa fa-github"></i> Open Source System</a>
+                &copy; 2015 @GlobalConstants.ApplicationName. Site by
+                <a href="@GlobalConstants.GitHubTeamUrl" title="Site by @GlobalConstants.TeamName">@GlobalConstants.TeamName</a> /
+                <a href="@GlobalConstants.GitHubProjectUrl"><i class="fa fa-github"></i> Open Source System</a>
             </div>
         </footer>
     </div>

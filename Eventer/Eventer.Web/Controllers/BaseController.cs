@@ -1,7 +1,4 @@
-﻿using System.Web;
-using Microsoft.AspNet.Identity.Owin;
-
-namespace Eventer.Web.Controllers
+﻿namespace Eventer.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
